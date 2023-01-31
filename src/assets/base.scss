@@ -1,0 +1,153 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --color-kazi: #2c3e50;
+  --color-a0: #001345;
+  --color-a1: #011d66;
+  --color-a1-1: #002c9d;
+  --color-a1-2: #033ac6;
+  --color-a1-3: #0843d9;
+  --color-a2: #0070ff;
+  --color-a2-1: #0188ff;
+  --color-a2-2: #189fff;
+  --color-a2-3: #44b3ff;
+  --color-a2-4: #78c8ff;
+  --color-a2-5: #a7daff;
+  --color-a3: #d1ebff;
+  --color-a4: #ebf7ff;
+
+  --color-b0: #002e30;
+  --color-b0-1: #004143;
+  --color-b0-2: #005a5c;
+  --color-b0-3: #006d70;
+  --color-b1: #007e81;
+  --color-b1-1: #00949a;
+  --color-b1-2: #00abb6;
+  --color-b2: #00b8c7;
+  --color-b2-1: #35ccd8;
+  --color-b2-2: #69dce6;
+  --color-b2-3: #97f1f9;
+  --color-b3: #bef5f9;
+  --color-b4: #e4fdfd;
+
+  --color-c0: #012a00;
+  --color-c0-1: #043c03;
+  --color-c0-2: #004800;
+  --color-c0-3: #006300;
+  --color-c1: #008700;
+  --color-c1-1: #009d00;
+  --color-c1-2: #00b300;
+  --color-c2: #28cc12;
+  --color-c2-1: #4cda39;
+  --color-c2-2: #74eb62;
+  --color-c3: #a0f693;
+  --color-c4: #cffec8;
+  --color-c4-1: #ecffe9;
+
+  --color-d0: #733a00;
+  --color-d0-1: #994d00;
+  --color-d0-2: #a9660c;
+  --color-d0-3: #b98019;
+  --color-d1: #c99a25;
+  --color-d1-1: #e0b805;
+  --color-d1-2: #f2ce14;
+  --color-d1-3: #ffdd2c;
+  --color-d2: #ffe457;
+  --color-d2-1: #ffe979;
+  --color-d2-2: #fff0a1;
+  --color-d3: #fef4c0;
+  --color-d4: #fffae1;
+
+  --color-e0: #982d00;
+  --color-e0-1: #b83600;
+  --color-e0-2: #c84600;
+  --color-e0-3: #d85601;
+  --color-e1: #e86601;
+  --color-e1-1: #f87702;
+  --color-e1-2: #fe8700;
+  --color-e1-3: #ff9400;
+  --color-e1-4: #ffa324;
+  --color-e2: #ffb44c;
+  --color-e2-1: #ffca7f;
+  --color-e3: #ffdfb1;
+  --color-e4: #fff3e0;
+
+  --color-f0: #4f0018;
+  --color-f0-1: #6c0021;
+  --color-f0-2: #83002d;
+  --color-f0-3: #990035;
+  --color-f1: #b90040;
+  --color-f1-1: #d60044;
+  --color-f1-2: #e60045;
+  --color-f1-3: #f1205a;
+  --color-f2: #f5396d;
+  --color-f2-1: #f75f89;
+  --color-f3: #ff96b3;
+  --color-f3-1: #ffccd9;
+  --color-f4: #ffebf1;
+
+  --color-g0: #370035;
+  --color-g0-1: #4e004b;
+  --color-g0-2: #6b0567;
+  --color-g1: #83087e;
+  --color-g1-1: #9a1594;
+  --color-g2: #b026aa;
+  --color-g2-1: #c23bbc;
+  --color-g2-2: #cf5ac9;
+  --color-g2-3: #d473cf;
+  --color-g2-4: #df8adb;
+  --color-g3: #eba7e7;
+  --color-g3-1: #f9cff7;
+  --color-g4: #ffebfe;
+
+  --color-h1: #27024a;
+  --color-h1-1: #3c0073;
+  --color-h2: #4c147f;
+  --color-h2-1: #5d298b;
+  --color-h2-2: #6d3e97;
+  --color-h2-3: #7e53a3;
+  --color-h2-4: #8e68af;
+  --color-h2-5: #9f7cbb;
+  --color-h3: #af91cb;
+  --color-h3-1: #c0a6d6;
+  --color-h3-2: #d0bbe1;
+  --color-h3-4: #e1d0ec;
+  --color-h4: #f2e5f7;
+
+  --color-gray00: #000000;
+  --color-gray0: #1a1a1a;
+  --color-gray0-1: #2e2e2e;
+  --color-gray0-2: #424242;
+  --color-gray0-3: #565656;
+  --color-gray1: #6b6b6b;
+  --color-gray1-1: #878787;
+  --color-gray2: #9e9e9e;
+  --color-gray2-1: #b0b0b0;
+  --color-gray2-2: #c7c7c7;
+  --color-gray2-3: #dddddd;
+  --color-gray3: #e9e9e9;
+  --color-gray4: #f7f7f7;
+  --color-gray5: #979797;
+}
+
+:root {
+  --color-background: var(--color-gray4);
+  --color-header-background: hsla(0, 0%, 100%, 0.7);
+  --color-border: var(--color-gray0-1);
+  --color-text: var(--color-gray0-1);
+}
+
+:root.dark {
+  --color-background: var(--color-gray0-1);
+  --color-header-background: var(--color-kazi);
+  --color-border: var(--color-gray3);
+  --color-text: var(--color-gray3);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--color-gray0-1);
+    --color-header-background: var(--color-kazi);
+    --color-border: var(--color-gray3);
+    --color-text: var(--color-gray3);
+  }
+}
