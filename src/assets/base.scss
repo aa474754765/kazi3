@@ -132,6 +132,7 @@
 :root {
   --color-background: var(--color-gray4);
   --color-header-background: hsla(0, 0%, 100%, 0.7);
+  --color-button-background: hsla(0, 0%, 100%, 0.7);
   --color-border: var(--color-gray0-1);
   --color-text: var(--color-gray0-1);
 }
@@ -139,6 +140,7 @@
 :root.dark {
   --color-background: var(--color-gray0-1);
   --color-header-background: var(--color-kazi);
+  --color-button-background: var(--color-kazi);
   --color-border: var(--color-gray3);
   --color-text: var(--color-gray3);
 }
@@ -147,6 +149,7 @@
   :root {
     --color-background: var(--color-gray0-1);
     --color-header-background: var(--color-kazi);
+    --color-button-background: var(--color-kazi);
     --color-border: var(--color-gray3);
     --color-text: var(--color-gray3);
   }

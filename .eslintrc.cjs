@@ -14,6 +14,12 @@ module.exports = {
   },
   rules: {
     "vue/multi-word-component-names": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn"
+    ],
+    "no-unused-vars": [
+      "warn"
+    ],
     "prettier/prettier": [
       "warn",
       {

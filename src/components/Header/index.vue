@@ -8,12 +8,10 @@ const toggleTheme = (status: boolean) => {
   if (!status) {
     document
       .querySelector("#logo")
-      ?.setAttribute("src", "../../../public/KAZI-dark.png");
+      ?.setAttribute("src", "../../../KAZI-dark.png");
     document.querySelector("html")?.setAttribute("class", "dark");
   } else {
-    document
-      .querySelector("#logo")
-      ?.setAttribute("src", "../../../public/KAZI.png");
+    document.querySelector("#logo")?.setAttribute("src", "../../../KAZI.png");
     document.querySelector("html")?.removeAttribute("class");
   }
 };
@@ -25,16 +23,12 @@ const toggleTheme = (status: boolean) => {
       <img id="logo" src="../../../public/KAZI.png" />
     </router-link>
     <div class="nav">
-      <router-link class="link" to="/">HOME</router-link>
+      <router-link class="link" to="/">GRADIENTS</router-link>
       <router-link class="link" to="/">CUSTOMIZE</router-link>
       <router-link class="link" to="/">STARS</router-link>
     </div>
     <div class="tools">
-      <el-switch
-        style="--el-switch-on-color: var(--color-kazi)"
-        v-model="theme"
-        @change="toggleTheme"
-      />
+      <el-switch style="--el-switch-on-color: var(--color-kazi)" v-model="theme" @change="toggleTheme" />
     </div>
   </div>
 </template>
@@ -62,14 +56,42 @@ const toggleTheme = (status: boolean) => {
   flex-direction: row;
 
   .link {
+    position: relative;
     font-size: 1.4rem;
     margin: 0 0.8rem;
     letter-spacing: 0.5px;
+  }
+
+  .link:nth-of-type(1):hover::after {
+    content: "GRADIENTS";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    animation: clip 0.3s linear;
+    background-image: linear-gradient(
+      to right,
+      rgb(142, 107, 251),
+      rgb(178, 253, 61)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 }
 
 .tools {
   flex-grow: 1;
   justify-content: right;
+}
+
+@keyframes clip {
+  0% {
+    clip: rect(0 0px 100px 0);
+  }
+
+  100% {
+    clip: rect(0 100px 100px 0);
+  }
 }
 </style>
