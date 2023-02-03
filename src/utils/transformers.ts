@@ -1,16 +1,16 @@
-import type { GradientsType, HSLInfo } from "@/types";
+import type { GradientsType, HSLValue } from "@/types";
 import { defaultGradientsTypes } from "@/types/models";
 
-function generateHSL(hslData: HSLInfo): number[] {
+function generateHSL(hslData: HSLValue): number[] {
   const arr: number[] = [];
   hslData &&
     Object.values(hslData).forEach((val) => {
-      arr.push(Math.random() * (val.max - val.min) + val.min);
+      arr.push(val);
     });
   return arr;
 }
 
-function generateHSLByType(type: GradientsType): number[] {
+function generateRandomHSL(type: GradientsType): number[] {
   const hslData = defaultGradientsTypes[type];
   const arr: number[] = [];
   hslData &&
@@ -52,12 +52,12 @@ export function randomDeg(): string {
 }
 
 // generate RBG based on the given gradients type or the given hsl values
-export function generateRGB(data: HSLInfo): string {
+export function generateRGB(data: HSLValue): string {
   const hslArray = generateHSL(data);
   return hslToRgb(hslArray).join(",");
 }
 
-export function generateRGBByType(data: GradientsType): string {
-  const hslArray = generateHSLByType(data);
+export function generateRandomRGBByType(data: GradientsType): string {
+  const hslArray = generateRandomHSL(data);
   return hslToRgb(hslArray).join(",");
 }

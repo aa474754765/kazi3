@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { generateRGB } from "@/utils/transformers";
+import { generateRandomRGBByType } from "@/utils/transformers";
 import type { GradientsType } from "@/types";
 import { computed, type CSSProperties } from "vue";
 
 const props = withDefaults(
-  defineProps<{ gradientsType: GradientsType; active?: boolean }>(),
+  defineProps<{ gradientsType?: GradientsType; active?: boolean }>(),
   {
     active: false,
     gradientsType: undefined,
@@ -15,9 +15,9 @@ const props = withDefaults(
 const gradientStyles = computed((): CSSProperties => {
   if (props.gradientsType) {
     return {
-      "background-image": `linear-gradient(to right, rgb(${generateRGB(
+      "background-image": `linear-gradient(to right, rgb(${generateRandomRGBByType(
         props.gradientsType
-      )}), rgb(${generateRGB(props.gradientsType)}))`,
+      )}), rgb(${generateRandomRGBByType(props.gradientsType)}))`,
       "background-clip": "text",
       "-webkit-background-clip": "text",
       color: "transparent",
@@ -44,6 +44,11 @@ const gradientStyles = computed((): CSSProperties => {
   background-color: var(--color-button-background);
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
   cursor: pointer;
+}
+
+.kazi-btn.primary {
+  color: var(--color-gray0-1);
+  background-color: var(--color-e3);
 }
 
 .kazi-btn.active {

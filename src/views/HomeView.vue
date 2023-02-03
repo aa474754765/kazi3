@@ -2,7 +2,7 @@
 import { debounce } from "lodash";
 import { onMounted, onUnmounted, ref } from "vue";
 import GradientsBox from "@/components/GradientsBox/index.vue";
-import Btn from "@/components/Button/index.vue";
+import CustomizeDialog from "@/components/CustomizeDialog/index.vue";
 import type { GradientsType } from "@/types";
 import { randowArr } from "@/utils";
 
@@ -25,45 +25,50 @@ onMounted(() => {
 onUnmounted(() => {
   window.document.removeEventListener("scroll", onscroll);
 });
-
-function changeGradientType(type: GradientsType) {
+const changeGradientType = (type: GradientsType): void => {
   gradients.value = randowArr(16);
   gradientType.value = type;
-}
+};
+
+//customize part
+const modalVisible = ref(false);
+const openCustumizeDialog = (): void => {
+  modalVisible.value = true;
+};
 </script>
 <template>
   <h1>Generate your gradients</h1>
   <el-row>
-    <btn
+    <kazi-btn
       gradients-type="PASTEL"
       @click="changeGradientType('PASTEL')"
       :active="gradientType === 'PASTEL'"
-      >PASTEL</btn
+      >PASTEL</kazi-btn
     >
-    <btn
+    <kazi-btn
       gradients-type="COOL"
       @click="changeGradientType('COOL')"
       :active="gradientType === 'COOL'"
-      >COOL</btn
+      >COOL</kazi-btn
     >
-    <btn
+    <kazi-btn
       gradients-type="STRONG"
       @click="changeGradientType('STRONG')"
       :active="gradientType === 'STRONG'"
-      >STRONG</btn
+      >STRONG</kazi-btn
     >
-    <btn
+    <kazi-btn
       gradients-type="BRIGHT"
       @click="changeGradientType('BRIGHT')"
       :active="gradientType === 'BRIGHT'"
-      >BRIGHT</btn
+      >BRIGHT</kazi-btn
     >
-    <btn
+    <kazi-btn
       gradients-type="CUSTOMIZE"
-      @click="changeGradientType('CUSTOMIZE')"
+      @click="openCustumizeDialog"
       :active="gradientType === 'CUSTOMIZE'"
     >
-      CUSTOMIZE</btn
+      CUSTOMIZE</kazi-btn
     >
   </el-row>
   <el-row :gutter="32">
@@ -79,6 +84,7 @@ function changeGradientType(type: GradientsType) {
       <GradientsBox :type="gradientType" class="grid-content" />
     </el-col>
   </el-row>
+  <customize-dialog v-model:visible="modalVisible"></customize-dialog>
 </template>
 
 <style scoped lang="scss">

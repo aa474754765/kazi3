@@ -28,7 +28,11 @@ const toggleTheme = (status: boolean) => {
       <router-link class="link" to="/">STARS</router-link>
     </div>
     <div class="tools">
-      <el-switch style="--el-switch-on-color: var(--color-kazi)" v-model="theme" @change="toggleTheme" />
+      <el-switch
+        style="--el-switch-on-color: var(--color-kazi)"
+        v-model="theme"
+        @change="toggleTheme"
+      />
     </div>
   </div>
 </template>

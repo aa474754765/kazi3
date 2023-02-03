@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, type CSSProperties } from "vue";
-import { randomDeg, generateRGBByType } from "@/utils/transformers";
+import { randomDeg, generateRandomRGBByType } from "@/utils/transformers";
 import type { GradientsType } from "@/types";
 
 interface Props {
@@ -12,9 +12,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const elStyle = computed((): CSSProperties => {
   return {
-    "background-image": `linear-gradient(${randomDeg()}deg, rgb(${generateRGBByType(
+    "background-image": `linear-gradient(${randomDeg()}deg, rgb(${generateRandomRGBByType(
       props.type
-    )}), rgb(${generateRGBByType(props.type)}))`,
+    )}), rgb(${generateRandomRGBByType(props.type)}))`,
   };
 });
 </script>
