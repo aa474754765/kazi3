@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { computed, reactive, onMounted } from "vue";
-import type { HSLType, HSLValue } from "@/types";
+import type { HSLInfo, HSLType, HSLValue } from "@/types";
 import { generateRGB } from "@/utils/transformers";
 import ColorRange from "./ColorRange.vue";
+import { useGradientsStore } from "@/stores/gradients";
 
 const props = defineProps<{ visible: boolean }>();
-const emit = defineEmits(["update:visible"]);
+const emit = defineEmits<{
+  (e: "update:visible", value: boolean): void;
+  (e: "dataUpdated"): void;
+}>();
 const visible = computed({
   get() {
     return props.visible;
@@ -67,6 +71,27 @@ const colorsChanged = (type: HSLType): void => {
     })}), rgb(${generateRGB({ ...hslPercentage.value, lightness: 0.95 })}))`;
   }
 };
+
+const store = useGradientsStore();
+const sendCustomData = (): void => {
+  const internal = 0.3;
+  const data: HSLInfo = {
+    hue: {
+      min: hslPercentage.value.hue - internal,
+      max: hslPercentage.value.hue + internal,
+    },
+    saturation: {
+      min: hslPercentage.value.saturation - internal,
+      max: hslPercentage.value.saturation + internal,
+    },
+    lightness: {
+      min: hslPercentage.value.lightness - internal,
+      max: hslPercentage.value.lightness + internal,
+    },
+  };
+  store.setData(data);
+  emit("dataUpdated");
+};
 </script>
 
 <template>
@@ -108,7 +133,7 @@ const colorsChanged = (type: HSLType): void => {
     ></color-range>
     <div class="btn-line flex-between">
       <kazi-btn @click="initDefaultGradients">RESET</kazi-btn>
-      <kazi-btn class="primary">GENERATE</kazi-btn>
+      <kazi-btn @click="sendCustomData" class="primary">GENERATE</kazi-btn>
     </div>
   </el-dialog>
 </template>

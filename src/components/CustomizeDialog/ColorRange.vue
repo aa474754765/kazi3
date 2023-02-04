@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed, defineProps } from "vue";
 
-const emit = defineEmits(["update:value"]);
+const emit = defineEmits<{
+  (e: "update:value", value: string): void;
+}>();
 
 const props = withDefaults(
   defineProps<{

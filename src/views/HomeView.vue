@@ -84,7 +84,12 @@ const openCustumizeDialog = (): void => {
       <GradientsBox :type="gradientType" class="grid-content" />
     </el-col>
   </el-row>
-  <customize-dialog v-model:visible="modalVisible"></customize-dialog>
+  <KeepAlive>
+    <customize-dialog
+      @data-updated="changeGradientType('CUSTOMIZE')"
+      v-model:visible="modalVisible"
+    ></customize-dialog>
+  </KeepAlive>
 </template>
 
 <style scoped lang="scss">
