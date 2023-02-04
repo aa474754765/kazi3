@@ -6,7 +6,7 @@ import CustomizeDialog from "@/components/CustomizeDialog/index.vue";
 import type { GradientsType } from "@/types";
 import { randowArr } from "@/utils";
 
-const gradientType = ref<GradientsType>("PASTEL");
+const gradientType = ref<GradientsType>("STRONG");
 const gradients = ref(randowArr(16));
 // when scroll to the bottom, it should add the new gradients to the last
 const loadNewGradients = () => {
@@ -38,7 +38,13 @@ const openCustumizeDialog = (): void => {
 </script>
 <template>
   <h1>Generate your gradients</h1>
-  <el-row>
+  <el-row class="flex-center">
+    <kazi-btn
+      gradients-type="STRONG"
+      @click="changeGradientType('STRONG')"
+      :active="gradientType === 'STRONG'"
+      >STRONG</kazi-btn
+    >
     <kazi-btn
       gradients-type="PASTEL"
       @click="changeGradientType('PASTEL')"
@@ -50,12 +56,6 @@ const openCustumizeDialog = (): void => {
       @click="changeGradientType('COOL')"
       :active="gradientType === 'COOL'"
       >COOL</kazi-btn
-    >
-    <kazi-btn
-      gradients-type="STRONG"
-      @click="changeGradientType('STRONG')"
-      :active="gradientType === 'STRONG'"
-      >STRONG</kazi-btn
     >
     <kazi-btn
       gradients-type="BRIGHT"
@@ -93,15 +93,8 @@ const openCustumizeDialog = (): void => {
 </template>
 
 <style scoped lang="scss">
-h1 {
-  text-align: center;
-  margin: 2.4rem 0;
-  opacity: 0.7;
-}
-
 .el-row {
   margin-bottom: 2.4rem;
-  justify-content: center;
 
   button {
     margin-right: 1.2rem;
@@ -114,6 +107,7 @@ h1 {
 }
 
 .grid-content {
+  position: relative;
   border-radius: 1rem;
   min-height: 20rem;
 }

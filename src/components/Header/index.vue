@@ -24,8 +24,8 @@ const toggleTheme = (status: boolean) => {
     </router-link>
     <div class="nav">
       <router-link class="link" to="/">GRADIENTS</router-link>
-      <router-link class="link" to="/">CUSTOMIZE</router-link>
-      <router-link class="link" to="/">STARS</router-link>
+      <router-link class="link" to="/">PHOTOS</router-link>
+      <router-link class="link" to="/stars">STARS</router-link>
     </div>
     <div class="tools">
       <el-switch
@@ -77,6 +77,22 @@ const toggleTheme = (status: boolean) => {
       to right,
       rgb(142, 107, 251),
       rgb(178, 253, 61)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  .link:nth-of-type(3):hover::after {
+    content: "STARS";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    animation: clip 0.8s linear;
+    background-image: linear-gradient(
+      to right,
+      rgb(38, 40, 249),
+      rgb(161, 5, 238)
     );
     background-clip: text;
     -webkit-background-clip: text;
