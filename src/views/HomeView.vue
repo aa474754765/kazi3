@@ -86,15 +86,15 @@ const openCustumizeDialog = (): void => {
   </el-row>
   <el-row :gutter="32">
     <el-col
-      :xs="24"
-      :sm="12"
+      :xs="12"
+      :sm="8"
       :md="8"
       :lg="6"
       :xl="6"
       v-for="info in gradients"
       :key="info.colors"
     >
-      <GradientsBox :info="info" class="grid-content" />
+      <GradientsBox :info="info" />
     </el-col>
   </el-row>
   <KeepAlive>
@@ -115,13 +115,6 @@ const openCustumizeDialog = (): void => {
 }
 
 .el-col {
-  border-radius: 4px;
   margin-bottom: 3.2rem;
-}
-
-.grid-content {
-  position: relative;
-  border-radius: 1rem;
-  min-height: 20rem;
 }
 </style>

@@ -57,6 +57,12 @@ const unStar = () => {
     transform: scale(1.1);
   }
 }
+.gradients-box {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  border-radius: 1rem;
+}
 .gradients-box.star .el-icon,
 .gradients-box:hover .el-icon {
   display: unset;
