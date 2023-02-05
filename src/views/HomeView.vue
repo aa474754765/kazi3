@@ -3,11 +3,25 @@ import { debounce } from "lodash";
 import { onMounted, onUnmounted, ref } from "vue";
 import GradientsBox from "@/components/GradientsBox/index.vue";
 import CustomizeDialog from "@/components/CustomizeDialog/index.vue";
-import type { GradientsType } from "@/types";
+import type { BoxInfo, GradientsType } from "@/types";
+import { useGradientsStore } from "@/stores/gradients";
 import { randowArr } from "@/utils";
+import { randomDeg, generateRandomRGBByType } from "@/utils/transformers";
 
 const gradientType = ref<GradientsType>("STRONG");
-const gradients = ref(randowArr(16));
+const gradients = ref<BoxInfo[]>([]);
+const store = useGradientsStore();
+
+const getRandomBoxs = (type: GradientsType, length: number): BoxInfo[] => {
+  const customData = type === "CUSTOMIZE" ? store.customizeData : undefined;
+  return randowArr(length).map(() => ({
+    deg: randomDeg(),
+    colors: [
+      generateRandomRGBByType(type, customData),
+      generateRandomRGBByType(type, customData),
+    ],
+  }));
+};
 // when scroll to the bottom, it should add the new gradients to the last
 const loadNewGradients = () => {
   let viewHeight = document.documentElement.clientHeight;
@@ -15,20 +29,24 @@ const loadNewGradients = () => {
   let scrollTop = document.documentElement.scrollTop;
 
   if (viewHeight + scrollTop + 300 > offsetHeight) {
-    gradients.value = gradients.value.concat(randowArr(8));
+    gradients.value = gradients.value.concat(
+      getRandomBoxs(gradientType.value, 8)
+    );
   }
 };
+const changeGradientType = (type: GradientsType): void => {
+  gradientType.value = type;
+  gradients.value = getRandomBoxs(type, 16);
+};
 const onscroll = debounce(loadNewGradients, 200);
+
 onMounted(() => {
+  changeGradientType(gradientType.value);
   window.document.addEventListener("scroll", onscroll);
 });
 onUnmounted(() => {
   window.document.removeEventListener("scroll", onscroll);
 });
-const changeGradientType = (type: GradientsType): void => {
-  gradients.value = randowArr(16);
-  gradientType.value = type;
-};
 
 //customize part
 const modalVisible = ref(false);
@@ -40,31 +58,26 @@ const openCustumizeDialog = (): void => {
   <h1>Generate your gradients</h1>
   <el-row class="flex-center">
     <kazi-btn
-      gradients-type="STRONG"
       @click="changeGradientType('STRONG')"
       :active="gradientType === 'STRONG'"
       >STRONG</kazi-btn
     >
     <kazi-btn
-      gradients-type="PASTEL"
       @click="changeGradientType('PASTEL')"
       :active="gradientType === 'PASTEL'"
       >PASTEL</kazi-btn
     >
     <kazi-btn
-      gradients-type="COOL"
       @click="changeGradientType('COOL')"
       :active="gradientType === 'COOL'"
       >COOL</kazi-btn
     >
     <kazi-btn
-      gradients-type="BRIGHT"
       @click="changeGradientType('BRIGHT')"
       :active="gradientType === 'BRIGHT'"
       >BRIGHT</kazi-btn
     >
     <kazi-btn
-      gradients-type="CUSTOMIZE"
       @click="openCustumizeDialog"
       :active="gradientType === 'CUSTOMIZE'"
     >
@@ -78,10 +91,10 @@ const openCustumizeDialog = (): void => {
       :md="8"
       :lg="6"
       :xl="6"
-      v-for="i in gradients"
-      :key="i"
+      v-for="info in gradients"
+      :key="info.colors"
     >
-      <GradientsBox :type="gradientType" class="grid-content" />
+      <GradientsBox :info="info" class="grid-content" />
     </el-col>
   </el-row>
   <KeepAlive>

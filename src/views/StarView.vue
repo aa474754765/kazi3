@@ -2,11 +2,12 @@
 import { ref } from "vue";
 import GradientsBox from "@/components/GradientsBox/index.vue";
 import { starKey, Storager } from "@/utils/storage";
+import type { BoxInfo } from "@/types";
 
-const gradients = ref<string[]>([]);
+const gradients = ref<BoxInfo[]>([]);
 
 const renderStarBox = (): void => {
-  gradients.value = Storager.get<string>(starKey).map((i) => i.value);
+  gradients.value = Storager.get<BoxInfo>(starKey).map((i) => i.value);
 };
 renderStarBox();
 </script>
@@ -19,11 +20,11 @@ renderStarBox();
       :md="8"
       :lg="6"
       :xl="6"
-      v-for="i in gradients"
-      :key="i"
+      v-for="info in gradients"
+      :key="info.colors"
     >
       <GradientsBox
-        :gradients="i"
+        :info="info"
         :starred="true"
         @unstar="renderStarBox"
         class="grid-content"

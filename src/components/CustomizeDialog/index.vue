@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, onMounted } from "vue";
 import type { HSLInfo, HSLType, HSLValue } from "@/types";
-import { generateRGB } from "@/utils/transformers";
+import { generateRGBString } from "@/utils/transformers";
 import ColorRange from "./ColorRange.vue";
 import { useGradientsStore } from "@/stores/gradients";
 
@@ -51,24 +51,30 @@ const initDefaultGradients = (): void => {
 const colorsChanged = (type: HSLType): void => {
   if (type !== "hue") {
     gradients.hue = `linear-gradient(to right, 
-    rgb(${generateRGB({ ...hslPercentage.value, hue: 0 })}), 
-    rgb(${generateRGB({ ...hslPercentage.value, hue: 0.2 })}), 
-    rgb(${generateRGB({ ...hslPercentage.value, hue: 0.4 })}), 
-    rgb(${generateRGB({ ...hslPercentage.value, hue: 0.6 })}), 
-    rgb(${generateRGB({ ...hslPercentage.value, hue: 0.8 })}), 
-    rgb(${generateRGB({ ...hslPercentage.value, hue: 1 })}))`;
+    rgb(${generateRGBString({ ...hslPercentage.value, hue: 0 })}), 
+    rgb(${generateRGBString({ ...hslPercentage.value, hue: 0.2 })}), 
+    rgb(${generateRGBString({ ...hslPercentage.value, hue: 0.4 })}), 
+    rgb(${generateRGBString({ ...hslPercentage.value, hue: 0.6 })}), 
+    rgb(${generateRGBString({ ...hslPercentage.value, hue: 0.8 })}), 
+    rgb(${generateRGBString({ ...hslPercentage.value, hue: 1 })}))`;
   }
   if (type !== "saturation") {
-    gradients.saturation = `linear-gradient(to right, rgb(${generateRGB({
+    gradients.saturation = `linear-gradient(to right, rgb(${generateRGBString({
       ...hslPercentage.value,
       saturation: 0,
-    })}), rgb(${generateRGB({ ...hslPercentage.value, saturation: 1 })}))`;
+    })}), rgb(${generateRGBString({
+      ...hslPercentage.value,
+      saturation: 1,
+    })}))`;
   }
   if (type !== "lightness") {
-    gradients.lightness = `linear-gradient(to right, rgb(${generateRGB({
+    gradients.lightness = `linear-gradient(to right, rgb(${generateRGBString({
       ...hslPercentage.value,
       lightness: 0.05,
-    })}), rgb(${generateRGB({ ...hslPercentage.value, lightness: 0.95 })}))`;
+    })}), rgb(${generateRGBString({
+      ...hslPercentage.value,
+      lightness: 0.95,
+    })}))`;
   }
 };
 

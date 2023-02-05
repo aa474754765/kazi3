@@ -22,7 +22,9 @@ export class Storager {
 
   static remove<T>(key: Key, data: Data<T>): void {
     const result = this.get(key) || [];
-    const index = result.findIndex((i) => i.value == data.value);
+    const index = result.findIndex(
+      (i) => JSON.stringify(i.value) == JSON.stringify(data.value)
+    );
     if (index >= 0) {
       result.splice(index, 1);
     }

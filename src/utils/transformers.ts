@@ -1,4 +1,4 @@
-import type { GradientsType, HSLInfo, HSLValue } from "@/types";
+import type { GradientsType, HSLInfo, HSLValue, RBGValue } from "@/types";
 import { defaultGradientsTypes } from "@/types/models";
 
 function generateHSL(hslData: HSLValue): number[] {
@@ -29,7 +29,7 @@ function hueTorgb(p: number, q: number, t: number) {
   return p;
 }
 
-function hslToRgb(hslArray: number[]): number[] {
+function hslToRgb(hslArray: number[]): RBGValue {
   const [h, s, l] = [...hslArray];
   let r, g, b;
 
@@ -42,25 +42,28 @@ function hslToRgb(hslArray: number[]): number[] {
     g = hueTorgb(p, q, h);
     b = hueTorgb(p, q, h - 1 / 3);
   }
-
-  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+  return {
+    red: Math.round(r * 255),
+    green: Math.round(g * 255),
+    blue: Math.round(b * 255),
+  };
 }
 
 // random degree from 0 to 360
-export function randomDeg(): string {
-  return Math.round(Math.random() * 360) + "";
+export function randomDeg(): number {
+  return Math.round(Math.random() * 360);
 }
 
 // generate RBG based on the given gradients type or the given hsl values
-export function generateRGB(data: HSLValue): string {
+export function generateRGBString(data: HSLValue): string {
   const hslArray = generateHSL(data);
-  return hslToRgb(hslArray).join(",");
+  return Object.values(hslToRgb(hslArray)).join(",");
 }
 
 export function generateRandomRGBByType(
   type: GradientsType,
   data?: HSLInfo | undefined
-): string {
+): RBGValue {
   const hslArray = generateRandomHSL(type, data);
-  return hslToRgb(hslArray).join(",");
+  return hslToRgb(hslArray);
 }

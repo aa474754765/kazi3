@@ -1,44 +1,37 @@
 <script setup lang="ts">
 import { computed, type CSSProperties, ref } from "vue";
-import { randomDeg, generateRandomRGBByType } from "@/utils/transformers";
-import type { GradientsType } from "@/types";
+import type { BoxInfo } from "@/types";
 import { Storager, starKey } from "@/utils/storage";
-import { useGradientsStore } from "@/stores/gradients";
 
 interface Props {
-  type?: GradientsType;
-  gradients?: string;
   starred?: boolean;
+  info?: BoxInfo;
 }
 const props = withDefaults(defineProps<Props>(), {
-  type: "COOL",
-  gradients: "",
   starred: false,
+  info: () => ({ deg: 0, colors: [] }),
 });
 const emit = defineEmits<{
   (e: "unstar"): void;
 }>();
 
-const store = useGradientsStore();
 const elStyle = computed((): CSSProperties => {
+  const colors = props.info.colors.map(
+    (i) => `rgb(` + Object.values(i).join(",") + ")"
+  );
   return {
-    "background-image":
-      props.gradients ||
-      `linear-gradient(${randomDeg()}deg, rgb(${generateRandomRGBByType(
-        props.type,
-        store.customizeData
-      )}), rgb(${generateRandomRGBByType(props.type, store.customizeData)}))`,
+    "background-image": `linear-gradient(${props.info.deg}deg, ${colors})`,
   };
 });
 
 const starred = ref(props.starred);
 const star = () => {
   starred.value = true;
-  Storager.add(starKey, { value: elStyle.value["background-image"] });
+  Storager.add(starKey, { value: props.info });
 };
 const unStar = () => {
   starred.value = false;
-  Storager.remove(starKey, { value: elStyle.value["background-image"] });
+  Storager.remove(starKey, { value: props.info });
   emit("unstar");
 };
 </script>
@@ -74,7 +67,7 @@ const unStar = () => {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);
