@@ -24,7 +24,7 @@ const vMove = {
       el.style.width = `100%`;
       el.style.paddingTop = `100%`;
       el.style.transform = "unset";
-    }, 0);
+  }, 0);
   },
 };
 

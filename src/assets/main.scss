@@ -40,6 +40,7 @@ body {
 }
 
 .main-container {
+  position: relative;
   padding: 10rem;
   min-height: 100vh;
   overflow: hidden;
@@ -58,5 +59,25 @@ a {
 
   &:visited {
     color: inherit;
+  }
+}
+
+html,
+div {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-scroll-bar);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #ffffff;
   }
 }

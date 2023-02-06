@@ -3,14 +3,17 @@
 }
 
 .el-row.preview-mode {
-  height: 80px;
+  height: 100px;
   flex-wrap: nowrap;
   position: absolute;
-  bottom: 0;
-  overflow: hidden;
+  margin: 0 !important;
+  bottom: 1rem;
   width: calc(100% - 10rem);
   left: 5rem;
-  justify-content: center;
+  border-radius: 8px;
+  background-color: var(--color-preview-background);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.1);
+  overflow-y: hidden;
 
   .el-col {
     overflow: visible;

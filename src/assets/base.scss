@@ -130,6 +130,7 @@
 }
 
 :root {
+  --color-scroll-bar: var(--color-gray2);
   --color-background: var(--color-gray4);
   --color-header-background: hsla(0, 0%, 100%, 0.7);
   --color-button-background: hsla(0, 0%, 100%, 0.7);
@@ -139,6 +140,7 @@
 }
 
 :root.dark {
+  --color-scroll-bar: var(--color-gray2);
   --color-background: var(--color-gray0-1);
   --color-header-background: var(--color-kazi);
   --color-button-background: var(--color-kazi);
@@ -149,6 +151,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --color-scroll-bar: var(--color-gray2);
     --color-background: var(--color-gray0-1);
     --color-header-background: var(--color-kazi);
     --color-button-background: var(--color-kazi);

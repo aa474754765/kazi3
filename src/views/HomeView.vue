@@ -11,6 +11,7 @@ const {
   gradients,
   loadNewGradients,
   changeGradientType,
+  changeMode,
   viewMode
 } = useView();
 
@@ -31,6 +32,7 @@ const openCustumizeDialog = (): void => {
 </script>
 <template>
   <h1>Generate your gradients</h1>
+  <kazi-btn @click="changeMode">change mode</kazi-btn>
   <el-row class="flex-center">
     <kazi-btn
       @click="changeGradientType('STRONG')"
