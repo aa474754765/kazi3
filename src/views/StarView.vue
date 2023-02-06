@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import GradientsBox from "@/components/GradientsBox/index.vue";
 import { starKey, Storager } from "@/utils/storage";
 import type { BoxInfo } from "@/types";
+import vMove from "@/directives/move";
+import { useView } from "./hooks";
 
-const gradients = ref<BoxInfo[]>([]);
+const { gradients, viewMode, changeMode } = useView();
 
 const renderStarBox = (): void => {
   gradients.value = Storager.get<BoxInfo>(starKey).map((i) => i.value);
@@ -13,7 +14,8 @@ renderStarBox();
 </script>
 <template>
   <h1>Yours Favorites</h1>
-  <el-row :gutter="32">
+  <kazi-btn @click="changeMode">change mode</kazi-btn>
+  <el-row :gutter="32" :class="viewMode + '-mode'">
     <el-col
       :xs="12"
       :sm="8"
@@ -23,21 +25,15 @@ renderStarBox();
       v-for="info in gradients"
       :key="info.colors"
     >
-      <GradientsBox :info="info" :starred="true" @unstar="renderStarBox" />
+      <GradientsBox
+        v-move
+        :class="viewMode + '-mode'"
+        :info="info"
+        :starred="true"
+        @unstar="renderStarBox"
+      />
     </el-col>
   </el-row>
 </template>
 
-<style scoped lang="scss">
-.el-row {
-  margin-bottom: 2.4rem;
-
-  button {
-    margin-right: 1.2rem;
-  }
-}
-
-.el-col {
-  margin-bottom: 3.2rem;
-}
-</style>
+<style scoped lang="scss"></style>

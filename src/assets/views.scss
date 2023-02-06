@@ -1,0 +1,33 @@
+.el-row.overview-mode {
+  height: 100%;
+}
+
+.el-row.preview-mode {
+  height: 80px;
+  flex-wrap: nowrap;
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  width: calc(100% - 10rem);
+  left: 5rem;
+  justify-content: center;
+
+  .el-col {
+    overflow: visible;
+    width: 12vh;
+    flex-basis: auto;
+
+    @media (max-width: 767px) {
+      width: 10vh;
+    }
+  }
+
+  .gradients-box {
+    width: 100%;
+  }
+}
+
+.overview-mode,
+.preview-mode {
+  transition: all 0.5s ease-out;
+}

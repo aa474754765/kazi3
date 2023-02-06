@@ -62,9 +62,10 @@ const unStar = () => {
   padding-top: 100%;
   position: relative;
   border-radius: 1rem;
+  margin-bottom: 3.2rem;
 }
-.gradients-box.star .el-icon,
-.gradients-box:hover .el-icon {
+.gradients-box:not(.preview-mode).star .el-icon,
+.gradients-box:not(.preview-mode):hover .el-icon {
   display: unset;
 }
 

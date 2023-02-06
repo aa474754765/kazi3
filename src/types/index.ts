@@ -1,4 +1,5 @@
 export type Theme = "light" | "dark";
+export type ViewMode = "overview" | "preview";
 
 export type GradientsType =
   | "PASTEL"

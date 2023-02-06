@@ -1,45 +1,20 @@
 <script setup lang="ts">
-import { debounce } from "lodash";
 import { onMounted, onUnmounted, ref } from "vue";
 import GradientsBox from "@/components/GradientsBox/index.vue";
 import CustomizeDialog from "@/components/CustomizeDialog/index.vue";
-import type { BoxInfo, GradientsType } from "@/types";
-import { useGradientsStore } from "@/stores/gradients";
-import { randowArr } from "@/utils";
-import { randomDeg, generateRandomRGBByType } from "@/utils/transformers";
+import vMove from "@/directives/move";
+import { useView } from "./hooks";
+import { debounce } from "lodash";
 
-const gradientType = ref<GradientsType>("STRONG");
-const gradients = ref<BoxInfo[]>([]);
-const store = useGradientsStore();
+const {
+  gradientType,
+  gradients,
+  loadNewGradients,
+  changeGradientType,
+  viewMode
+} = useView();
 
-const getRandomBoxs = (type: GradientsType, length: number): BoxInfo[] => {
-  const customData = type === "CUSTOMIZE" ? store.customizeData : undefined;
-  return randowArr(length).map(() => ({
-    deg: randomDeg(),
-    colors: [
-      generateRandomRGBByType(type, customData),
-      generateRandomRGBByType(type, customData),
-    ],
-  }));
-};
-// when scroll to the bottom, it should add the new gradients to the last
-const loadNewGradients = () => {
-  let viewHeight = document.documentElement.clientHeight;
-  let offsetHeight = document.documentElement.offsetHeight;
-  let scrollTop = document.documentElement.scrollTop;
-
-  if (viewHeight + scrollTop + 300 > offsetHeight) {
-    gradients.value = gradients.value.concat(
-      getRandomBoxs(gradientType.value, 8)
-    );
-  }
-};
-const changeGradientType = (type: GradientsType): void => {
-  gradientType.value = type;
-  gradients.value = getRandomBoxs(type, 16);
-};
 const onscroll = debounce(loadNewGradients, 200);
-
 onMounted(() => {
   changeGradientType(gradientType.value);
   window.document.addEventListener("scroll", onscroll);
@@ -84,7 +59,7 @@ const openCustumizeDialog = (): void => {
       CUSTOMIZE</kazi-btn
     >
   </el-row>
-  <el-row :gutter="32">
+  <el-row :gutter="32" :class="viewMode + '-mode'">
     <el-col
       :xs="12"
       :sm="8"
@@ -94,7 +69,7 @@ const openCustumizeDialog = (): void => {
       v-for="info in gradients"
       :key="info.colors"
     >
-      <GradientsBox :info="info" />
+      <GradientsBox v-move :class="viewMode + '-mode'" :info="info" />
     </el-col>
   </el-row>
   <KeepAlive>
@@ -106,15 +81,8 @@ const openCustumizeDialog = (): void => {
 </template>
 
 <style scoped lang="scss">
-.el-row {
+button {
+  margin-right: 1.2rem;
   margin-bottom: 2.4rem;
-
-  button {
-    margin-right: 1.2rem;
-  }
-}
-
-.el-col {
-  margin-bottom: 3.2rem;
 }
 </style>
