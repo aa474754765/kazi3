@@ -89,6 +89,7 @@ const openCustumizeDialog = (): void => {
         v-move
         :class="viewMode + '-mode'"
         :info="info"
+        :focus="JSON.stringify(info) === JSON.stringify(selectedGradient)"
         @click="enterPreviewMode(info)"
       />
     </el-col>

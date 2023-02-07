@@ -7,9 +7,11 @@ const { isStar, setStarStatus, star, unStar, downloadHtml } = useShare();
 
 interface Props {
   info?: BoxInfo;
+  focus?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   info: () => ({ deg: 0, colors: [] }),
+  focus: false,
 });
 const emit = defineEmits<{
   (e: "unstar"): void;
@@ -45,7 +47,11 @@ const like = (): void => {
 };
 </script>
 <template>
-  <div :style="elStyle" class="gradients-box" :class="{ star: isStar }">
+  <div
+    :style="elStyle"
+    class="gradients-box"
+    :class="{ star: isStar, focus: props.focus }"
+  >
     <el-icon color="white" size="28" @click.stop="download">
       <Download />
     </el-icon>
@@ -85,6 +91,10 @@ const like = (): void => {
 .gradients-box.overview-mode.star .like-icon,
 .gradients-box.overview-mode:hover .like-icon {
   display: unset;
+}
+
+.gradients-box.preview-mode.focus {
+  border: 2px var(--color-f3) solid;
 }
 
 @keyframes star {
