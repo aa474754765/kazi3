@@ -52,6 +52,10 @@ body {
   @media (max-width: 767px) {
     padding: 10rem 2.4rem 0;
   }
+
+  @media (max-width: 499px) {
+    padding: 10rem 1.2rem;
+  }
 }
 
 a {

@@ -1,8 +1,11 @@
+import { ElNotification } from "element-plus";
+import useClipboard from "vue-clipboard3";
 import type { BoxInfo } from "@/types";
 import { starKey, Storager } from "@/utils/storage";
 import { ref } from "vue";
 
 export function useShare() {
+  const { toClipboard } = useClipboard();
   const isStar = ref(false);
 
   const setStarStatus = (info: BoxInfo): void => {
@@ -20,10 +23,25 @@ export function useShare() {
     Storager.remove(starKey, { value: info });
   };
 
+  const notify = (message: string) => {
+    ElNotification({
+      message: message,
+      type: "success",
+      duration: 2000,
+    });
+  };
+
+  const copy = (text: string) => {
+    toClipboard(text);
+    notify("Copy Success");
+  };
+
   return {
     isStar,
     setStarStatus,
     star,
     unStar,
+    notify,
+    copy,
   };
 }

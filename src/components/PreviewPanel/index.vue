@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { BoxInfo } from "@/types";
-import { computed, type CSSProperties } from "vue";
+import { computed, type CSSProperties, watch } from "vue";
+import { useShare } from "../share";
+
+const { isStar, setStarStatus, star, unStar, copy } = useShare();
 
 interface Props {
   info?: BoxInfo;
@@ -21,6 +24,10 @@ const info = computed({
   },
 });
 
+watch(info, () => {
+  setStarStatus(props.info);
+});
+
 const elStyle = computed((): CSSProperties => {
   return {
     "background-image": `linear-gradient(${
@@ -28,6 +35,17 @@ const elStyle = computed((): CSSProperties => {
     }deg, ${info.value.colors.join(",")})`,
   };
 });
+
+const copyCss = () => {
+  const color1 = info.value.colors[0];
+  const color2 = info.value.colors[1];
+  const text = `background-image: -moz-linear-gradient(90deg, ${color1}, ${color2});
+
+background-image: -webkit-linear-gradient(90deg, ${color1}, ${color2});
+
+background-image: linear-gradient(90deg, ${color1}, ${color2});`;
+  copy(text);
+};
 </script>
 
 <template>
@@ -41,19 +59,23 @@ const elStyle = computed((): CSSProperties => {
             </el-icon>
           </kazi-btn>
         </div>
-        <kazi-btn :style="{ 'background-color': info.colors[0] }">
+        <kazi-btn
+          :style="{ 'background-color': info.colors[0] }"
+          @click="copy(info.colors[0])"
+        >
           <el-icon>
             <CopyDocument />
           </el-icon>
         </kazi-btn>
         <kazi-btn
           :style="{ 'background-color': info.colors[info.colors.length - 1] }"
+          @click="copy(info.colors[info.colors.length - 1])"
         >
           <el-icon>
             <CopyDocument />
           </el-icon>
         </kazi-btn>
-        <kazi-btn>
+        <kazi-btn @click="copyCss">
           <el-icon>
             <CopyDocument />
           </el-icon>
@@ -64,10 +86,9 @@ const elStyle = computed((): CSSProperties => {
             <Download />
           </el-icon>
         </kazi-btn>
-        <kazi-btn>
-          <el-icon>
-            <Star />
-          </el-icon>
+        <kazi-btn :active="isStar" @click="!isStar ? star(info) : unStar(info)">
+          <el-icon v-if="!isStar"><Star /></el-icon>
+          <el-icon v-if="isStar"><StarFilled /></el-icon>
         </kazi-btn>
       </div>
       <div class="perview-image" :style="elStyle"></div>

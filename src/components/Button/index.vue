@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { generateRandomRGBByType } from "@/utils/transformers";
 import type { GradientsType } from "@/types";
-import { computed, type CSSProperties } from "vue";
 
 const props = withDefaults(
   defineProps<{ gradientsType?: GradientsType; active?: boolean }>(),
@@ -10,22 +8,6 @@ const props = withDefaults(
     gradientsType: undefined,
   }
 );
-
-// not used yet
-const gradientStyles = computed((): CSSProperties => {
-  if (props.gradientsType) {
-    return {
-      "background-image": `linear-gradient(to right, rgb(${generateRandomRGBByType(
-        props.gradientsType
-      )}), rgb(${generateRandomRGBByType(props.gradientsType)}))`,
-      "background-clip": "text",
-      "-webkit-background-clip": "text",
-      color: "transparent",
-    };
-  } else {
-    return {};
-  }
-});
 </script>
 <template>
   <button class="kazi-btn" type="button" :class="{ active: props.active }">
