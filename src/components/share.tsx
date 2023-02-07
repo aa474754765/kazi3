@@ -1,5 +1,6 @@
 import { ElNotification } from "element-plus";
 import useClipboard from "vue-clipboard3";
+import html2canvas from "html2canvas";
 import type { BoxInfo } from "@/types";
 import { starKey, Storager } from "@/utils/storage";
 import { ref } from "vue";
@@ -36,6 +37,24 @@ export function useShare() {
     notify("Copy Success");
   };
 
+  const downJpgByCanvas = (canvas: HTMLCanvasElement) => {
+    const oA = document.createElement("a");
+    const time = new Date().getTime();
+    oA.download = "img_" + time + ".jpg";
+    oA.href = canvas.toDataURL("image/jpeg");
+    document.body.appendChild(oA);
+    oA.click();
+    oA.remove();
+  };
+
+  const downloadHtml = (target: HTMLElement) => {
+    document.body.append(target);
+    html2canvas(target).then((canvas: HTMLCanvasElement): void => {
+      downJpgByCanvas(canvas);
+      target.remove();
+    });
+  };
+
   return {
     isStar,
     setStarStatus,
@@ -43,5 +62,6 @@ export function useShare() {
     unStar,
     notify,
     copy,
+    downloadHtml,
   };
 }

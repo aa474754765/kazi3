@@ -7,8 +7,8 @@ import App from "./App.vue";
 import router from "./router";
 import Btn from "@/components/Button/index.vue";
 
-import "./assets/main.scss";
 import "element-plus/dist/index.css";
+import "./assets/main.scss";
 
 const app = createApp(App);
 

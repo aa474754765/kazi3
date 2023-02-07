@@ -26,6 +26,7 @@ renderStarBox();
     >
       <GradientsBox
         v-move
+        :show-tools="false"
         :class="viewMode + '-mode'"
         :info="info"
         @unstar="renderStarBox"

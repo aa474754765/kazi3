@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { Download } from "@element-plus/icons-vue";
 import type { BoxInfo } from "@/types";
-import { computed, type CSSProperties, watch } from "vue";
+import { computed, type CSSProperties, watch, reactive } from "vue";
 import { useShare } from "../share";
 
-const { isStar, setStarStatus, star, unStar, copy } = useShare();
+const { isStar, setStarStatus, star, unStar, copy, downloadHtml } = useShare();
 
 interface Props {
   info?: BoxInfo;
@@ -46,6 +47,22 @@ background-image: -webkit-linear-gradient(90deg, ${color1}, ${color2});
 background-image: linear-gradient(90deg, ${color1}, ${color2});`;
   copy(text);
 };
+
+const downloadSettings = reactive<{ width: number; height: number }>({
+  width: 2560,
+  height: 1600,
+});
+const download = () => {
+  const target = document.createElement("div");
+  target.style.width = isNaN(downloadSettings.width)
+    ? "1920px"
+    : `${downloadSettings.width}px`;
+  target.style.height = isNaN(downloadSettings.width)
+    ? "1200px"
+    : `${downloadSettings.height}px`;
+  target.style.backgroundImage = elStyle.value["background-image"] as string;
+  downloadHtml(target);
+};
 </script>
 
 <template>
@@ -81,17 +98,31 @@ background-image: linear-gradient(90deg, ${color1}, ${color2});`;
           </el-icon>
           <span class="copy-text">Copy CSS</span>
         </kazi-btn>
-        <kazi-btn>
-          <el-icon>
-            <Download />
+        <el-popover placement="top-start" width="300" trigger="hover">
+          <div class="download-settings">
+            <el-input v-model="downloadSettings.width"></el-input>
+            <span>×</span>
+            <el-input v-model="downloadSettings.height"></el-input>
+            <el-button @click="download" :icon="Download">Download</el-button>
+          </div>
+          <template #reference>
+            <kazi-btn>
+              <el-icon>
+                <Download />
+              </el-icon>
+            </kazi-btn>
+          </template>
+        </el-popover>
+        <kazi-btn :active="isStar" @click="!isStar ? star(info) : unStar(info)">
+          <el-icon v-if="!isStar">
+            <Star />
+          </el-icon>
+          <el-icon v-if="isStar">
+            <StarFilled />
           </el-icon>
         </kazi-btn>
-        <kazi-btn :active="isStar" @click="!isStar ? star(info) : unStar(info)">
-          <el-icon v-if="!isStar"><Star /></el-icon>
-          <el-icon v-if="isStar"><StarFilled /></el-icon>
-        </kazi-btn>
       </div>
-      <div class="perview-image" :style="elStyle"></div>
+      <div id="preview-image" class="preview-image" :style="elStyle"></div>
       <template v-if="info.colors.length !== 0">
         <div class="properties flex-between">
           <div class="left-color">
@@ -125,11 +156,10 @@ background-image: linear-gradient(90deg, ${color1}, ${color2});`;
 </template>
 
 <style scoped lang="scss">
-.perview-image {
+.preview-image {
   width: 100%;
   height: 0;
   padding-top: 60%;
-  border-radius: 16px;
 }
 
 .operation {
@@ -147,8 +177,24 @@ background-image: linear-gradient(90deg, ${color1}, ${color2});`;
   }
 }
 
+.download-settings {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  span {
+    width: 10rem;
+    text-align: center;
+    color: var(--color-text);
+  }
+
+  button {
+    margin-left: 1rem;
+  }
+}
 .properties {
   height: 80px;
+
   .degree {
     display: flex;
     align-items: center;

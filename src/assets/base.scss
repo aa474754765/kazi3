@@ -137,6 +137,8 @@
   --color-dialog-background: var(--color-gray4);
   --color-border: var(--color-gray2-2);
   --color-text: var(--color-gray0-1);
+  --el-text-color-regular: var(--color-gray0-1);
+  --el-bg-color-overlay: hsla(0, 0%, 100%, 1);
 }
 
 :root.dark {
@@ -147,6 +149,8 @@
   --color-dialog-background: var(--color-kazi);
   --color-border: var(--color-gray3);
   --color-text: var(--color-gray3);
+  --el-text-color-regular: var(--color-gray0);
+  --el-bg-color-overlay: var(--color-kazi);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -158,6 +162,8 @@
     --color-dialog-background: var(--color-kazi);
     --color-border: var(--color-gray3);
     --color-text: var(--color-gray3);
+    --el-text-color-regular: var(--color-gray3);
+    --el-bg-color-overlay: var(--color-kazi);
   }
 }
 

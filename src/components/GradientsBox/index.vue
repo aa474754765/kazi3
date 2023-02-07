@@ -3,13 +3,15 @@ import { computed, type CSSProperties, onMounted } from "vue";
 import type { BoxInfo } from "@/types";
 import { useShare } from "@/components/share";
 
-const { isStar, setStarStatus, star, unStar } = useShare();
+const { isStar, setStarStatus, star, unStar, downloadHtml } = useShare();
 
 interface Props {
   info?: BoxInfo;
+  showTools?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   info: () => ({ deg: 0, colors: [] }),
+  showTools: true,
 });
 const emit = defineEmits<{
   (e: "unstar"): void;
@@ -26,10 +28,27 @@ const elStyle = computed((): CSSProperties => {
 onMounted(() => {
   setStarStatus(props.info);
 });
+
+const download = () => {
+  const target = document.createElement("div");
+  target.style.width = "1920px";
+  target.style.height = "1200px";
+  target.style.backgroundImage = elStyle.value["background-image"] as string;
+  downloadHtml(target);
+};
 </script>
 <template>
   <div :style="elStyle" class="gradients-box" :class="{ star: isStar }">
-    <el-icon color="white" size="36">
+    <el-icon
+      v-if="props.showTools"
+      color="white"
+      size="24"
+      class="download-icon"
+      @click.stop="download"
+    >
+      <Download />
+    </el-icon>
+    <el-icon color="white" size="24" class="star-icon">
       <Star v-if="!isStar" @click.stop="star(info)" />
       <StarFilled v-else @click.stop="unStar(info), emit('unstar')" />
     </el-icon>
@@ -48,6 +67,9 @@ onMounted(() => {
   &:hover {
     transform: scale(1.1);
   }
+}
+.download-icon {
+  right: 4.8rem;
 }
 .gradients-box {
   width: 100%;
