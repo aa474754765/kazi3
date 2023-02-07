@@ -15,6 +15,12 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.1);
   overflow-y: hidden;
 
+  @media (max-width: 767px) {
+    height: 80px;
+    width: calc(100% - 2rem);
+    left: 1rem;
+  }
+
   .el-col {
     overflow: visible;
     width: 12vh;
@@ -33,4 +39,34 @@
 .overview-mode,
 .preview-mode {
   transition: all 0.5s ease-out;
+}
+
+// animation
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-enter-active-1000 {
+  animation: bounce-in 1s;
+}
+.bounce-leave-active {
+  animation: bounce-out 0.1s;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounce-out {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
 }

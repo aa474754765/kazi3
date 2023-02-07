@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { computed, type CSSProperties, ref } from "vue";
+import { computed, type CSSProperties, onMounted } from "vue";
 import type { BoxInfo } from "@/types";
-import { Storager, starKey } from "@/utils/storage";
+import { useShare } from "@/components/share";
+
+const { isStar, setStarStatus, star, unStar } = useShare();
 
 interface Props {
-  starred?: boolean;
   info?: BoxInfo;
 }
 const props = withDefaults(defineProps<Props>(), {
-  starred: false,
   info: () => ({ deg: 0, colors: [] }),
 });
 const emit = defineEmits<{
@@ -16,30 +16,22 @@ const emit = defineEmits<{
 }>();
 
 const elStyle = computed((): CSSProperties => {
-  const colors = props.info.colors.map(
-    (i) => `rgb(` + Object.values(i).join(",") + ")"
-  );
   return {
-    "background-image": `linear-gradient(${props.info.deg}deg, ${colors})`,
+    "background-image": `linear-gradient(${
+      props.info.deg
+    }deg, ${props.info.colors.join(",")})`,
   };
 });
 
-const starred = ref(props.starred);
-const star = () => {
-  starred.value = true;
-  Storager.add(starKey, { value: props.info });
-};
-const unStar = () => {
-  starred.value = false;
-  Storager.remove(starKey, { value: props.info });
-  emit("unstar");
-};
+onMounted(() => {
+  setStarStatus(props.info);
+});
 </script>
 <template>
-  <div :style="elStyle" class="gradients-box" :class="{ star: starred }">
+  <div :style="elStyle" class="gradients-box" :class="{ star: isStar }">
     <el-icon color="white" size="36">
-      <Star v-if="!starred" @click="star" />
-      <StarFilled v-else @click="unStar" />
+      <Star v-if="!isStar" @click.stop="star(info)" />
+      <StarFilled v-else @click.stop="unStar(info), emit('unstar')" />
     </el-icon>
   </div>
 </template>
@@ -63,6 +55,7 @@ const unStar = () => {
   position: relative;
   border-radius: 1rem;
   margin: 1.6rem 0;
+  cursor: pointer;
 }
 .gradients-box:not(.preview-mode).star .el-icon,
 .gradients-box:not(.preview-mode):hover .el-icon {

@@ -5,7 +5,7 @@ import type { BoxInfo } from "@/types";
 import vMove from "@/directives/move";
 import { useView } from "./hooks";
 
-const { gradients, viewMode, changeMode } = useView();
+const { gradients, viewMode } = useView();
 
 const renderStarBox = (): void => {
   gradients.value = Storager.get<BoxInfo>(starKey).map((i) => i.value);
@@ -14,7 +14,6 @@ renderStarBox();
 </script>
 <template>
   <h1>Yours Favorites</h1>
-  <kazi-btn @click="changeMode">change mode</kazi-btn>
   <el-row :gutter="32" :class="viewMode + '-mode'">
     <el-col
       :xs="12"
@@ -29,7 +28,6 @@ renderStarBox();
         v-move
         :class="viewMode + '-mode'"
         :info="info"
-        :starred="true"
         @unstar="renderStarBox"
       />
     </el-col>

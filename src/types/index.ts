@@ -23,5 +23,5 @@ export type GradientsTypes = {
 };
 export interface BoxInfo {
   deg: number;
-  colors: RBGValue[];
+  colors: string[];
 }
