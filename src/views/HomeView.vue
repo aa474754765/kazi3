@@ -34,7 +34,7 @@ const openCustumizeDialog = (): void => {
 };
 </script>
 <template>
-  <h1>Generate your gradients</h1>
+  <h1>Generate Your Gradients</h1>
   <Transition
     enter-active-class="bounce-enter-active"
     leave-active-class="bounce-leave-active"

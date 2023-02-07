@@ -10,28 +10,32 @@ import { useView } from "./hooks";
 const { gradients, viewMode, changeMode, selectedGradient, enterPreviewMode } =
   useView();
 
-const renderStarBox = (): void => {
-  gradients.value = Storager.get<BoxInfo>(starKey).map((i) => i.value);
+const renderView = (): void => {
+  renderStarBox();
   if (gradients.value.length === 0) {
     changeMode("overview");
   } else {
     selectedGradient.value = gradients.value[0];
   }
 };
+const renderStarBox = (): void => {
+  gradients.value = Storager.get<BoxInfo>(starKey).map((i) => i.value);
+};
 
 onMounted(() => {
-  renderStarBox();
+  renderView();
 });
 </script>
 <template>
-  <h1>Yours Favorites</h1>
+  <h1>Your Favorites</h1>
   <Transition
     enter-active-class="bounce-enter-active"
     leave-active-class="bounce-leave-active"
   >
     <preview-panel
       @back="changeMode('overview')"
-      @unstar="renderStarBox"
+      @star="renderStarBox"
+      @unstar="renderView"
       v-show="viewMode === 'preview'"
       v-model:info="selectedGradient"
     ></preview-panel>
@@ -49,6 +53,7 @@ onMounted(() => {
       <GradientsBox
         v-move
         :class="viewMode + '-mode'"
+        :focus="JSON.stringify(info) === JSON.stringify(selectedGradient)"
         :info="info"
         @click="enterPreviewMode(info)"
         @unstar="renderStarBox"

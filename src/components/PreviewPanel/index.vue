@@ -16,6 +16,7 @@ const emit = defineEmits<{
   (e: "update:info", value: BoxInfo): void;
   (e: "back"): void;
   (e: "unstar"): void;
+  (e: "star"): void;
 }>();
 const info = computed({
   get() {
@@ -63,6 +64,16 @@ const download = () => {
     : `${downloadSettings.height}px`;
   target.style.backgroundImage = elStyle.value["background-image"] as string;
   downloadHtml(target);
+};
+
+const starClicked = (info: BoxInfo) => {
+  if (isStar.value) {
+    unStar(info);
+    emit("unstar");
+  } else {
+    star(info);
+    emit("star");
+  }
 };
 </script>
 
@@ -114,9 +125,10 @@ const download = () => {
             </kazi-btn>
           </template>
         </el-popover>
-        <kazi-btn @click="!isStar ? star(info) : unStar(info), emit('unstar')">
+        <kazi-btn @click="starClicked(info)">
           <svg-icon
             name="heart"
+            :style="{ height: '1.4em' }"
             :color="isStar ? 'var(--like-color)' : 'var(--color-gray2)'"
           ></svg-icon>
         </kazi-btn>
@@ -127,7 +139,10 @@ const download = () => {
           <div class="left-color">
             <el-color-picker
               :model-value="info.colors[0]"
-              @active-change="info.colors[0] = $event"
+              @active-change="
+                info.colors[0] = $event;
+                isStar = false;
+              "
               show-alpha
             />
           </div>
@@ -137,14 +152,20 @@ const download = () => {
               :min="0"
               :max="360"
               :model-value="info.deg"
-              @input="info.deg = $event"
+              @input="
+                info.deg = $event;
+                isStar = false;
+              "
             ></el-slider>
             {{ info.deg + "deg" }}
           </div>
           <div class="right-color">
             <el-color-picker
               :model-value="info.colors[info.colors.length - 1]"
-              @active-change="info.colors[info.colors.length - 1] = $event"
+              @change="
+                info.colors[info.colors.length - 1] = $event;
+                isStar = false;
+              "
               show-alpha
             />
           </div>
