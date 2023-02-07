@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
   (e: "update:info", value: BoxInfo): void;
   (e: "back"): void;
+  (e: "unstar"): void;
 }>();
 const info = computed({
   get() {
@@ -67,7 +68,7 @@ const download = () => {
 
 <template>
   <el-row justify="center">
-    <el-col :xs="20" :sm="16" :md="12" :lg="11" :xl="8">
+    <el-col :xs="20" :sm="16" :md="14" :lg="11" :xl="8">
       <div class="operation">
         <div class="back-btn">
           <kazi-btn @click="emit('back')">
@@ -113,7 +114,10 @@ const download = () => {
             </kazi-btn>
           </template>
         </el-popover>
-        <kazi-btn :active="isStar" @click="!isStar ? star(info) : unStar(info)">
+        <kazi-btn
+          :active="isStar"
+          @click="!isStar ? star(info) : unStar(info), emit('unstar')"
+        >
           <el-icon v-if="!isStar">
             <Star />
           </el-icon>

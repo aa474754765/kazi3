@@ -46,6 +46,10 @@ export function useView() {
   const changeMode = (mode: ViewMode) => {
     viewMode.value = mode;
   };
+  const enterPreviewMode = (info: BoxInfo) => {
+    changeMode("preview");
+    selectedGradient.value = info;
+  };
 
   return {
     gradientType,
@@ -55,5 +59,6 @@ export function useView() {
     viewMode,
     changeMode,
     selectedGradient,
+    enterPreviewMode,
   };
 }

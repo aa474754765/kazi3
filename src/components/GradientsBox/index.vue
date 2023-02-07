@@ -7,11 +7,9 @@ const { isStar, setStarStatus, star, unStar, downloadHtml } = useShare();
 
 interface Props {
   info?: BoxInfo;
-  showTools?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   info: () => ({ deg: 0, colors: [] }),
-  showTools: true,
 });
 const emit = defineEmits<{
   (e: "unstar"): void;
@@ -40,7 +38,6 @@ const download = () => {
 <template>
   <div :style="elStyle" class="gradients-box" :class="{ star: isStar }">
     <el-icon
-      v-if="props.showTools"
       color="white"
       size="24"
       class="download-icon"

@@ -6,7 +6,6 @@ import PreviewPanel from "@/components/PreviewPanel/index.vue";
 import vMove from "@/directives/move";
 import { useView } from "./hooks";
 import { debounce } from "lodash";
-import type { BoxInfo } from "@/types";
 
 const {
   gradientType,
@@ -16,6 +15,7 @@ const {
   changeMode,
   viewMode,
   selectedGradient,
+  enterPreviewMode,
 } = useView();
 
 const onscroll = debounce(loadNewGradients, 200);
@@ -31,12 +31,6 @@ onUnmounted(() => {
 const modalVisible = ref(false);
 const openCustumizeDialog = (): void => {
   modalVisible.value = true;
-};
-
-//preview
-const enterPreviewMode = (info: BoxInfo) => {
-  changeMode("preview");
-  selectedGradient.value = info;
 };
 </script>
 <template>
