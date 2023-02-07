@@ -25,7 +25,7 @@ const toggleTheme = (status: boolean) => {
     <div class="nav">
       <router-link class="link" to="/">GRADIENTS</router-link>
       <router-link class="link" to="/">PHOTOS</router-link>
-      <router-link class="link" to="/stars">STARS</router-link>
+      <router-link class="link" to="/stars">LIKES</router-link>
     </div>
     <div class="tools">
       <el-switch
@@ -83,7 +83,7 @@ const toggleTheme = (status: boolean) => {
     color: transparent;
   }
   .link:nth-of-type(3):hover::after {
-    content: "STARS";
+    content: "LIKES";
     position: absolute;
     top: 50%;
     left: 50%;

@@ -114,16 +114,11 @@ const download = () => {
             </kazi-btn>
           </template>
         </el-popover>
-        <kazi-btn
-          :active="isStar"
-          @click="!isStar ? star(info) : unStar(info), emit('unstar')"
-        >
-          <el-icon v-if="!isStar">
-            <Star />
-          </el-icon>
-          <el-icon v-if="isStar">
-            <StarFilled />
-          </el-icon>
+        <kazi-btn @click="!isStar ? star(info) : unStar(info), emit('unstar')">
+          <svg-icon
+            name="heart"
+            :color="isStar ? 'var(--like-color)' : 'var(--color-gray2)'"
+          ></svg-icon>
         </kazi-btn>
       </div>
       <div id="preview-image" class="preview-image" :style="elStyle"></div>

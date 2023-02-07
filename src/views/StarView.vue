@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
 import GradientsBox from "@/components/GradientsBox/index.vue";
 import PreviewPanel from "@/components/PreviewPanel/index.vue";
 import { starKey, Storager } from "@/utils/storage";
@@ -17,7 +18,10 @@ const renderStarBox = (): void => {
     selectedGradient.value = gradients.value[0];
   }
 };
-renderStarBox();
+
+onMounted(() => {
+  renderStarBox();
+});
 </script>
 <template>
   <h1>Yours Favorites</h1>
