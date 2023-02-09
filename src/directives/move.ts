@@ -1,6 +1,6 @@
-import type { DirectiveBinding } from "vue";
+import type { Directive, DirectiveBinding } from "vue";
 
-const vMove = {
+const vMove: Directive = {
   beforeUpdate: (el: HTMLElement) => {
     el.dataset.info = JSON.stringify(el.getBoundingClientRect());
     el.style.transition = "unset";

@@ -49,10 +49,12 @@ export function useShare() {
 
   const downloadHtml = (target: HTMLElement) => {
     document.body.append(target);
-    html2canvas(target).then((canvas: HTMLCanvasElement): void => {
-      downJpgByCanvas(canvas);
-      target.remove();
-    });
+    html2canvas(target, { scale: 4 }).then(
+      (canvas: HTMLCanvasElement): void => {
+        downJpgByCanvas(canvas);
+        target.remove();
+      }
+    );
   };
 
   return {

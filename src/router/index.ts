@@ -10,6 +10,11 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: "/wallpaper",
+      name: "Wallpaper",
+      component: () => import("../views/WallpaperView.vue"),
+    },
+    {
       path: "/stars",
       name: "Stars",
       component: () => import("../views/StarView.vue"),

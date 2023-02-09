@@ -1,4 +1,4 @@
-import type { GradientsTypes } from ".";
+import type { GradientsTypes, WallpaperInfo } from ".";
 
 export const defaultGradientsTypes: GradientsTypes = {
   PASTEL: {
@@ -57,4 +57,43 @@ export const defaultGradientsTypes: GradientsTypes = {
       max: 0.6,
     },
   },
+};
+
+export const defaultWallPaperSettings: WallpaperInfo = {
+  bgImage: [
+    {
+      deg: 283,
+      colors: [
+        {
+          text: "rgb(233, 254, 98)",
+          percentage: 0,
+        },
+        {
+          text: "rgb(250, 85, 196)",
+          percentage: 100,
+        },
+      ],
+    },
+    {
+      deg: 205,
+      colors: [
+        {
+          text: "rgb(254, 123, 244)",
+          percentage: 0,
+        },
+        {
+          text: "rgb(139, 251, 208)",
+          percentage: 100,
+        },
+      ],
+    },
+  ],
+  texts: [
+    {
+      text: "Hello",
+      font: "cursive",
+      size: 32,
+      rotate: 0,
+    },
+  ],
 };

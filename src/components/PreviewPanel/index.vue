@@ -157,7 +157,7 @@ const starClicked = (info: BoxInfo) => {
                 isStar = false;
               "
             ></el-slider>
-            {{ info.deg + "deg" }}
+            {{ info.deg + "°" }}
           </div>
           <div class="right-color">
             <el-color-picker

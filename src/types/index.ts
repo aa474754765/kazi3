@@ -25,3 +25,22 @@ export interface BoxInfo {
   deg: number;
   colors: string[];
 }
+
+export interface ColorsSetting {
+  text: string;
+  percentage?: number;
+}
+export interface BgSetting {
+  deg: number;
+  colors: ColorsSetting[];
+}
+export interface TextSetting {
+  text: string;
+  size: number;
+  rotate: number;
+  font: string;
+}
+export interface WallpaperInfo {
+  bgImage: BgSetting[];
+  texts?: TextSetting[];
+}

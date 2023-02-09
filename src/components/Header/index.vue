@@ -20,11 +20,11 @@ const toggleTheme = (status: boolean) => {
 <template>
   <div class="header-bar header-container">
     <router-link to="/" class="logo">
-      <img id="logo" src="../../../public/KAZI.png" />
+      <img id="logo" src="/KAZI.png" />
     </router-link>
     <div class="nav">
       <router-link class="link" to="/">GRADIENTS</router-link>
-      <router-link class="link" to="/">PHOTOS</router-link>
+      <router-link class="link" to="/wallpaper">WALLPAPER</router-link>
       <router-link class="link" to="/stars">LIKES</router-link>
     </div>
     <div class="tools">
