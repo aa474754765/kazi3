@@ -8,6 +8,11 @@ const vDrag: Directive = {
       const containerWidth = (el.parentElement as HTMLElement).clientWidth;
       const containerHeight = (el.parentElement as HTMLElement).clientHeight;
       document.onmousemove = (e) => {
+        if (bindings.modifiers.preventColor) {
+          (
+            el.querySelector(".el-color-picker__trigger") as HTMLElement
+          ).style.pointerEvents = "none";
+        }
         let left = bindings.modifiers.preventX
           ? el.offsetLeft
           : e.clientX - offsetX;
@@ -26,10 +31,25 @@ const vDrag: Directive = {
         }
         el.style.left = left + "px";
         el.style.top = top + "px";
+        el.style.zIndex = "999";
+
+        //calculate the left percentage and set in attribute for ease compute
+        const percentX =
+          (left /
+            ((el.parentElement as HTMLElement).clientWidth - el.clientWidth)) *
+            100 +
+          "";
+        el.setAttribute("per", percentX);
       };
       document.onmouseup = () => {
+        if (bindings.modifiers.preventColor) {
+          (
+            el.querySelector(".el-color-picker__trigger") as HTMLElement
+          ).style.pointerEvents = "auto";
+        }
         document.onmousemove = null;
         document.onmouseup = null;
+        el.style.zIndex = "auto";
       };
     };
   },

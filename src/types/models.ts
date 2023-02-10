@@ -69,6 +69,10 @@ export const defaultWallPaperSettings: WallpaperInfo = {
           percentage: 0,
         },
         {
+          text: "rgb(224, 13, 241)",
+          percentage: 40,
+        },
+        {
           text: "rgb(250, 85, 196)",
           percentage: 100,
         },
@@ -92,8 +96,9 @@ export const defaultWallPaperSettings: WallpaperInfo = {
     {
       text: "Hello",
       font: "cursive",
-      size: 32,
+      size: 250,
       rotate: 0,
+      color: "purple",
     },
   ],
 };

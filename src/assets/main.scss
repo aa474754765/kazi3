@@ -41,16 +41,20 @@ body {
 
 .main-container {
   position: relative;
-  padding: 10rem;
+  padding: 10rem 6rem;
   min-height: 100vh;
   overflow: hidden;
 
+  @media (max-width: 1199px) {
+    padding: 10rem 2.4rem 0;
+  }
+
   @media (max-width: 991px) {
-    padding: 10rem 4.8rem 0;
+    padding: 10rem 2.4rem 0;
   }
 
   @media (max-width: 767px) {
-    padding: 10rem 2.4rem 0;
+    padding: 10rem 1.2rem 0;
   }
 
   @media (max-width: 499px) {

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { reactive } from "vue";
 import Wallpaper from "@/components/WallPaper/index.vue";
+import ColorsPanel from "@/components/WallPaper/ColorsPanel.vue";
+import TextsPanel from "@/components/WallPaper/TextsPanel.vue";
 import type { WallpaperInfo } from "@/types";
 import { defaultWallPaperSettings } from "@/types/models";
-import { reactive } from "vue";
 
 const paperInfo: WallpaperInfo = reactive<WallpaperInfo>(
   defaultWallPaperSettings
@@ -10,10 +12,15 @@ const paperInfo: WallpaperInfo = reactive<WallpaperInfo>(
 </script>
 
 <template>
-  <el-row justify="center">
-    <el-col :xs="24" :sm="6" :md="5" :lg="6" :xl="6" class="tools-panel">
+  <el-row justify="center" :gutter="24">
+    <el-col :xs="24" :sm="8" :md="6" :lg="6" :xl="6" class="tools-panel">
+      <colors-panel
+        title="Gradients"
+        :settings="paperInfo.bgImage"
+      ></colors-panel>
+      <texts-panel title="Texts" :settings="paperInfo.texts"></texts-panel>
     </el-col>
-    <el-col :xs="24" :sm="18" :md="19" :lg="18" :xl="18">
+    <el-col :xs="24" :sm="16" :md="18" :lg="18" :xl="18">
       <wallpaper :data="paperInfo"></wallpaper>
     </el-col>
   </el-row>

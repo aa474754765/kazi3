@@ -29,6 +29,7 @@ const backGroundImage = computed<string>(() => {
         fontFamily: t.font,
         fontSize: t.size + 'px',
         rotate: t.rotate + 'deg',
+        color: t.color,
       }"
       v-drag
       >{{ t.text }}</a

@@ -28,7 +28,7 @@ export interface BoxInfo {
 
 export interface ColorsSetting {
   text: string;
-  percentage?: number;
+  percentage: number;
 }
 export interface BgSetting {
   deg: number;
@@ -39,6 +39,7 @@ export interface TextSetting {
   size: number;
   rotate: number;
   font: string;
+  color: string;
 }
 export interface WallpaperInfo {
   bgImage: BgSetting[];
