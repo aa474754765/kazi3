@@ -49,18 +49,21 @@ onMounted(() => {
     }
   );
 });
-const addColor = () => {
+const addColor = (): void => {
   const newColor: ColorsSetting = {
     text: "rgb(255, 255, 255)",
     percentage: 100,
   };
   colors.value.push(newColor);
 };
+const removeColor = (index: number): void => {
+  colors.value.splice(index, 1);
+};
 </script>
 <template>
   <div
     ref="slider"
-    class="gradients-slider flex-center"
+    class="gradients-slider flex-center bounce-enter-active"
     :style="{ '--radius': '24px' }"
   >
     <div class="gradients-container">
@@ -73,7 +76,21 @@ const addColor = () => {
         :key="color.text"
         class="item"
       >
-        <el-color-picker v-model="color.text" show-alpha></el-color-picker>
+        <el-tooltip
+          :content="Math.round(color.percentage) + '%'"
+          placement="top"
+          effect="light"
+        >
+          <template #content>
+            <div class="flex-center">
+              <span>{{ Math.round(color.percentage) + "%" }}</span>
+              <el-icon v-show="colors.length > 2" @click="removeColor(index)"><Delete /></el-icon>
+            </div>
+          </template>
+          <div>
+            <el-color-picker v-model="color.text" show-alpha></el-color-picker>
+          </div>
+        </el-tooltip>
       </div>
     </div>
     <div class="flex-center" style="width: 24px">

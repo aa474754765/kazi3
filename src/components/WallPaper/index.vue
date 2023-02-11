@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { ref, watch } from "vue";
 import type { WallpaperInfo } from "@/types";
 import vDrag from "@/directives/drag";
 
 const props = defineProps<{ data: WallpaperInfo }>();
 
-const backGroundImage = computed<string>(() => {
-  const gradients = props.data.bgImage.map(
-    (bg) =>
-      `linear-gradient(${bg.deg}deg, ${bg.colors
-        .map((c) => c.text + " " + c.percentage + "%")
-        .join(", ")})`
-  );
-  return gradients.join(",");
-});
+const backGroundImage = ref("");
+watch(
+  props.data.bgImage,
+  (value) => {
+    backGroundImage.value = value
+      .map(
+        (bg) =>
+          `linear-gradient(${bg.deg}deg, ${bg.colors
+            .map((c) => c.text + " " + c.percentage + "%")
+            .join(", ")})`
+      )
+      .join(",");
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -42,7 +48,7 @@ const backGroundImage = computed<string>(() => {
   position: relative;
   width: 100%;
   height: 0;
-  padding-top: 60%;
+  padding-top: 56.25%;
   border-radius: 2rem;
   background-blend-mode: overlay;
   overflow: hidden;

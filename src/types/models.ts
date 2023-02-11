@@ -96,7 +96,7 @@ export const defaultWallPaperSettings: WallpaperInfo = {
     {
       text: "Hello",
       font: "cursive",
-      size: 250,
+      size: 36,
       rotate: 0,
       color: "purple",
     },
