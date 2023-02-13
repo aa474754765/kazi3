@@ -27,6 +27,7 @@ export interface BoxInfo {
 }
 
 export interface ColorsSetting {
+  id: string;
   text: string;
   percentage: number;
 }

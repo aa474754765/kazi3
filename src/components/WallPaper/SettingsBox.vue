@@ -10,8 +10,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div class="settings-panel">
-    <div class="title">
-      {{ props.title }}
+    <div class="title flex-between">
+      <span>{{ props.title }}</span>
+      <slot name="title"></slot>
     </div>
     <slot></slot>
   </div>

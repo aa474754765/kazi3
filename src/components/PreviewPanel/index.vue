@@ -162,7 +162,7 @@ const starClicked = (info: BoxInfo) => {
           <div class="right-color">
             <el-color-picker
               :model-value="info.colors[info.colors.length - 1]"
-              @change="
+              @active-change="
                 info.colors[info.colors.length - 1] = $event;
                 isStar = false;
               "

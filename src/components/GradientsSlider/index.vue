@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
 import { useMutationObserver } from "@vueuse/core";
+import { newColor } from "@/types/models";
 import type { ColorsSetting } from "@/types";
 import vLeft from "./vLeft";
 import vDrag from "@/directives/drag";
+import { deepClone } from "@/utils";
 
 interface Props {
   value: ColorsSetting[];
+  radius?: number;
 }
 interface Emits {
   (e: "update:value", val: ColorsSetting[]): void;
 }
 const props = withDefaults(defineProps<Props>(), {
   value: () => [],
+  radius: 20,
 });
 const emit = defineEmits<Emits>();
 const colors = computed<ColorsSetting[]>({
@@ -50,11 +54,7 @@ onMounted(() => {
   );
 });
 const addColor = (): void => {
-  const newColor: ColorsSetting = {
-    text: "rgb(255, 255, 255)",
-    percentage: 100,
-  };
-  colors.value.push(newColor);
+  colors.value.push(deepClone(newColor));
 };
 const removeColor = (index: number): void => {
   colors.value.splice(index, 1);
@@ -63,8 +63,8 @@ const removeColor = (index: number): void => {
 <template>
   <div
     ref="slider"
-    class="gradients-slider flex-center bounce-enter-active"
-    :style="{ '--radius': '24px' }"
+    class="gradients-slider flex-center"
+    :style="{ '--radius': props.radius + 'px' }"
   >
     <div class="gradients-container">
       <div class="center-line"></div>
@@ -73,7 +73,7 @@ const removeColor = (index: number): void => {
         v-left="color.percentage"
         v-for="(color, index) of colors"
         :index="index"
-        :key="color.text"
+        :key="color.id"
         class="item"
       >
         <el-tooltip
@@ -84,17 +84,23 @@ const removeColor = (index: number): void => {
           <template #content>
             <div class="flex-center">
               <span>{{ Math.round(color.percentage) + "%" }}</span>
-              <el-icon v-show="colors.length > 2" @click="removeColor(index)"><Delete /></el-icon>
+              <el-icon v-show="colors.length > 2" @click="removeColor(index)"
+                ><Delete
+              /></el-icon>
             </div>
           </template>
           <div>
-            <el-color-picker v-model="color.text" show-alpha></el-color-picker>
+            <el-color-picker
+              :model-value="color.text"
+              @active-change="color.text = $event"
+              show-alpha
+            ></el-color-picker>
           </div>
         </el-tooltip>
       </div>
     </div>
     <div class="flex-center" style="width: 24px">
-      <el-icon v-show="!(colors.length > 4)" :size="24">
+      <el-icon v-show="!(colors.length > 4)" :size="18">
         <CirclePlusFilled @click="addColor" />
       </el-icon>
     </div>
@@ -103,6 +109,7 @@ const removeColor = (index: number): void => {
 
 <style scoped lang="scss">
 .gradients-slider {
+  width: 100%;
   height: 5rem;
   position: relative;
   background-color: transparent;

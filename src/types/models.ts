@@ -1,4 +1,10 @@
-import type { GradientsTypes, WallpaperInfo } from ".";
+import { uuid } from "vue-uuid";
+import type {
+  GradientsTypes,
+  WallpaperInfo,
+  BgSetting,
+  ColorsSetting,
+} from ".";
 
 export const defaultGradientsTypes: GradientsTypes = {
   PASTEL: {
@@ -65,14 +71,17 @@ export const defaultWallPaperSettings: WallpaperInfo = {
       deg: 283,
       colors: [
         {
+          id: uuid.v1(),
           text: "rgb(233, 254, 98)",
           percentage: 0,
         },
         {
+          id: uuid.v1(),
           text: "rgb(224, 13, 241)",
           percentage: 40,
         },
         {
+          id: uuid.v1(),
           text: "rgb(250, 85, 196)",
           percentage: 100,
         },
@@ -82,10 +91,12 @@ export const defaultWallPaperSettings: WallpaperInfo = {
       deg: 205,
       colors: [
         {
+          id: uuid.v1(),
           text: "rgb(254, 123, 244)",
           percentage: 0,
         },
         {
+          id: uuid.v1(),
           text: "rgb(139, 251, 208)",
           percentage: 100,
         },
@@ -101,4 +112,26 @@ export const defaultWallPaperSettings: WallpaperInfo = {
       color: "purple",
     },
   ],
+};
+
+export const newGradientSetting: BgSetting = {
+  deg: 0,
+  colors: [
+    {
+      id: uuid.v1(),
+      text: "rgba(255, 255, 255, 0)",
+      percentage: 0,
+    },
+    {
+      id: uuid.v1(),
+      text: "rgba(255, 255, 255, 0)",
+      percentage: 100,
+    },
+  ],
+};
+
+export const newColor: ColorsSetting = {
+  id: uuid.v1(),
+  text: "rgba(255, 255, 255, 0)",
+  percentage: 100,
 };
