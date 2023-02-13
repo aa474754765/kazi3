@@ -2,6 +2,7 @@
 import { ref, watch } from "vue";
 import type { WallpaperInfo } from "@/types";
 import vDrag from "@/directives/drag";
+import EventBus from "@/utils/eventBus";
 
 const props = defineProps<{ data: WallpaperInfo }>();
 
@@ -20,16 +21,21 @@ watch(
   },
   { immediate: true }
 );
+
+const textClicked = (id: string) => {
+  EventBus.emit("text", id);
+};
 </script>
 
 <template>
   <div
     :style="{ 'background-image': backGroundImage }"
     id="kazi-wallpaper"
-    class="kazi-wallpaper"
+    class="kazi-wallpaper scale-enter-active"
   >
     <a
-      v-for="t in data.texts"
+      v-for="t in props.data.texts"
+      @click="textClicked(t.id)"
       :key="t.text"
       :style="{
         fontFamily: t.font,
@@ -48,6 +54,7 @@ watch(
   position: relative;
   width: 100%;
   height: 0;
+  margin-bottom: 2rem;
   padding-top: 56.25%;
   border-radius: 2rem;
   background-blend-mode: overlay;

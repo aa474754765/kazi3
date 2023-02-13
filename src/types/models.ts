@@ -4,6 +4,8 @@ import type {
   WallpaperInfo,
   BgSetting,
   ColorsSetting,
+  TextSetting,
+  Font,
 } from ".";
 
 export const defaultGradientsTypes: GradientsTypes = {
@@ -72,32 +74,17 @@ export const defaultWallPaperSettings: WallpaperInfo = {
       colors: [
         {
           id: uuid.v1(),
-          text: "rgb(233, 254, 98)",
+          text: "rgb(219, 87, 43)",
           percentage: 0,
         },
         {
           id: uuid.v1(),
-          text: "rgb(224, 13, 241)",
-          percentage: 40,
+          text: "rgb(135, 13, 241)",
+          percentage: 62,
         },
         {
           id: uuid.v1(),
-          text: "rgb(250, 85, 196)",
-          percentage: 100,
-        },
-      ],
-    },
-    {
-      deg: 205,
-      colors: [
-        {
-          id: uuid.v1(),
-          text: "rgb(254, 123, 244)",
-          percentage: 0,
-        },
-        {
-          id: uuid.v1(),
-          text: "rgb(139, 251, 208)",
+          text: "rgb(0, 230, 191)",
           percentage: 100,
         },
       ],
@@ -105,13 +92,22 @@ export const defaultWallPaperSettings: WallpaperInfo = {
   ],
   texts: [
     {
+      id: uuid.v1(),
       text: "Hello",
       font: "cursive",
-      size: 36,
+      size: 48,
       rotate: 0,
-      color: "purple",
+      color: "rgb(219,209,71)",
     },
   ],
+};
+export const newText: TextSetting = {
+  id: uuid.v1(),
+  text: "Helloooooooo",
+  font: "cursive",
+  size: 36,
+  rotate: 0,
+  color: "rgba(255,255,255)",
 };
 
 export const newGradientSetting: BgSetting = {
@@ -135,3 +131,10 @@ export const newColor: ColorsSetting = {
   text: "rgba(255, 255, 255, 0)",
   percentage: 100,
 };
+
+export const selectedFonts: Font[] = [
+  {
+    label: "Cursive",
+    value: "cursive",
+  },
+];

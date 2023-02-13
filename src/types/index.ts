@@ -1,5 +1,9 @@
 export type Theme = "light" | "dark";
 export type ViewMode = "overview" | "preview";
+export interface Font {
+  label: string;
+  value: string;
+}
 
 export type GradientsType =
   | "PASTEL"
@@ -36,6 +40,7 @@ export interface BgSetting {
   colors: ColorsSetting[];
 }
 export interface TextSetting {
+  id: string;
   text: string;
   size: number;
   rotate: number;

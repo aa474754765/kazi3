@@ -89,3 +89,29 @@ div {
     background-color: #ffffff;
   }
 }
+
+//color picker
+.el-color-picker,
+.el-color-picker__color-inner,
+.el-color-picker__trigger,
+.el-color-picker__color {
+  width: var(--radius, 24px);
+  height: var(--radius, 24px);
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+}
+
+.el-color-picker__color-inner {
+  border: 2px solid var(--color-gray2-1);
+}
+
+.el-color-picker:hover .el-color-picker__trigger {
+  width: var(--radius, 24px);
+  height: var(--radius, 24px);
+  border: none !important;
+}
+
+.el-color-picker .el-color-picker__icon {
+  display: none;
+}

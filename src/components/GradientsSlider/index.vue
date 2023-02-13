@@ -16,7 +16,7 @@ interface Emits {
 }
 const props = withDefaults(defineProps<Props>(), {
   value: () => [],
-  radius: 20,
+  radius: 22,
 });
 const emit = defineEmits<Emits>();
 const colors = computed<ColorsSetting[]>({
@@ -85,7 +85,7 @@ const removeColor = (index: number): void => {
             <div class="flex-center">
               <span>{{ Math.round(color.percentage) + "%" }}</span>
               <el-icon v-show="colors.length > 2" @click="removeColor(index)"
-                ><Delete
+                ><Close
               /></el-icon>
             </div>
           </template>
@@ -101,7 +101,7 @@ const removeColor = (index: number): void => {
     </div>
     <div class="flex-center" style="width: 24px">
       <el-icon v-show="!(colors.length > 4)" :size="18">
-        <CirclePlusFilled @click="addColor" />
+        <CirclePlus @click="addColor" />
       </el-icon>
     </div>
   </div>
@@ -144,30 +144,5 @@ const removeColor = (index: number): void => {
   color: var(--color-gray1-1);
   background-color: transparent;
   cursor: pointer;
-}
-
-:deep(.el-color-picker),
-:deep(.el-color-picker__color-inner),
-:deep(.el-color-picker__trigger),
-:deep(.el-color-picker__color) {
-  width: var(--radius);
-  height: var(--radius);
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-}
-
-:deep(.el-color-picker__color-inner) {
-  border: 2px solid var(--color-gray1-1);
-}
-
-:deep(.el-color-picker:hover) .el-color-picker__trigger {
-  width: var(--radius);
-  height: var(--radius);
-  border: none !important;
-}
-
-:deep(.el-color-picker) .el-color-picker__icon {
-  display: none;
 }
 </style>

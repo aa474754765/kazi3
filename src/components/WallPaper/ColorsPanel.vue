@@ -52,6 +52,10 @@ const removeGradient = (index: number): void => {
           >
             <template #content>
               <el-slider
+                :style="{
+                  '--el-slider-button-size': '16px',
+                  '--el-slider-height': '4px',
+                }"
                 :min="0"
                 :max="360"
                 v-model="element.deg"
@@ -75,7 +79,7 @@ const removeGradient = (index: number): void => {
                 <el-icon
                   v-show="settings.length > 1"
                   @click="removeGradient(index)"
-                  ><Delete
+                  ><Close
                 /></el-icon>
               </div>
             </template>

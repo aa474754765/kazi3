@@ -18,7 +18,7 @@ const paperInfo: WallpaperInfo = reactive<WallpaperInfo>(
         title="Gradients"
         v-model:value="paperInfo.bgImage"
       ></colors-panel>
-      <texts-panel title="Texts" :settings="paperInfo.texts"></texts-panel>
+      <texts-panel title="Texts" :value="paperInfo.texts"></texts-panel>
     </el-col>
     <el-col :xs="24" :sm="16" :md="18" :lg="18" :xl="18">
       <wallpaper :data="paperInfo"></wallpaper>

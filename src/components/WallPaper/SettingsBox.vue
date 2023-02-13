@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="settings-panel">
+  <div class="settings-panel scale-enter-active">
     <div class="title flex-between">
       <span>{{ props.title }}</span>
       <slot name="title"></slot>
@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
   box-shadow: 0px 2px 6px 1px var(--color-box-shadow);
 
   .title {
-    padding: 0.8rem;
+    padding: 0.8rem 0;
     font-size: 1.4rem;
     border-bottom: 1px solid var(--color-border);
   }
