@@ -1,12 +1,11 @@
 import { ElNotification } from "element-plus";
-import useClipboard from "vue-clipboard3";
+import { useClipboard } from '@vueuse/core'
 import html2canvas from "html2canvas";
 import type { BoxInfo } from "@/types";
 import { starKey, Storager } from "@/utils/storage";
 import { ref } from "vue";
 
 export function useShare() {
-  const { toClipboard } = useClipboard();
   const isStar = ref(false);
 
   const setStarStatus = (info: BoxInfo): void => {
@@ -32,8 +31,9 @@ export function useShare() {
     });
   };
 
-  const copy = (text: string) => {
-    toClipboard(text);
+  const { copy } = useClipboard();
+  const copyText = (text: string) => {
+    copy(text);
     notify("Copy Success");
   };
 
@@ -63,7 +63,7 @@ export function useShare() {
     star,
     unStar,
     notify,
-    copy,
+    copyText,
     downloadHtml,
   };
 }

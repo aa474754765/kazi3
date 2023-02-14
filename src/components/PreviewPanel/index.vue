@@ -4,7 +4,7 @@ import type { BoxInfo } from "@/types";
 import { computed, type CSSProperties, watch, reactive } from "vue";
 import { useShare } from "../share";
 
-const { isStar, setStarStatus, star, unStar, copy, downloadHtml } = useShare();
+const { isStar, setStarStatus, star, unStar, copyText, downloadHtml } = useShare();
 
 interface Props {
   info?: BoxInfo;
@@ -47,7 +47,7 @@ const copyCss = () => {
 background-image: -webkit-linear-gradient(90deg, ${color1}, ${color2});
 
 background-image: linear-gradient(90deg, ${color1}, ${color2});`;
-  copy(text);
+copyText(text);
 };
 
 const downloadSettings = reactive<{ width: number; height: number }>({
@@ -90,7 +90,7 @@ const starClicked = (info: BoxInfo) => {
         </div>
         <kazi-btn
           :style="{ 'background-color': info.colors[0] }"
-          @click="copy(info.colors[0])"
+          @click="copyText(info.colors[0])"
         >
           <el-icon>
             <CopyDocument />
@@ -98,7 +98,7 @@ const starClicked = (info: BoxInfo) => {
         </kazi-btn>
         <kazi-btn
           :style="{ 'background-color': info.colors[info.colors.length - 1] }"
-          @click="copy(info.colors[info.colors.length - 1])"
+          @click="copyText(info.colors[info.colors.length - 1])"
         >
           <el-icon>
             <CopyDocument />
