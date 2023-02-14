@@ -29,16 +29,12 @@ const vDrag: Directive = {
         } else if (top + el.clientHeight > containerHeight) {
           top = containerHeight - el.clientHeight;
         }
-        el.style.left = left + "px";
-        el.style.top = top + "px";
+        el.style.left = (left * 100) / containerWidth + "%";
+        el.style.top = (top * 100) / containerHeight + "%";
         el.style.zIndex = "999";
 
         //calculate the left percentage and set in attribute for ease compute
-        const percentX =
-          (left /
-            ((el.parentElement as HTMLElement).clientWidth - el.clientWidth)) *
-            100 +
-          "";
+        const percentX = (left / (containerWidth - el.clientWidth)) * 100 + "";
         el.setAttribute("per", percentX);
       };
       document.onmouseup = () => {

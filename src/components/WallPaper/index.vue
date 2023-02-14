@@ -29,7 +29,10 @@ const textClicked = (id: string) => {
 
 <template>
   <div
-    :style="{ 'background-image': backGroundImage }"
+    :style="{
+      'background-image': backGroundImage,
+      '--default-size': '16px',
+    }"
     id="kazi-wallpaper"
     class="kazi-wallpaper scale-enter-active"
   >
@@ -52,6 +55,7 @@ const textClicked = (id: string) => {
 <style scoped lang="scss">
 .kazi-wallpaper {
   position: relative;
+  font-size: var(--default-size);
   width: 100%;
   height: 0;
   margin-bottom: 2rem;
@@ -59,6 +63,10 @@ const textClicked = (id: string) => {
   border-radius: 2rem;
   background-blend-mode: overlay;
   overflow: hidden;
+
+  &.fullscreen {
+    border-radius: 0;
+  }
 }
 
 .paper {
@@ -75,6 +83,6 @@ a {
   color: red;
   top: 0;
   left: 0;
-  transform-origin: 0% 0%;
+  transform-origin: center center;
 }
 </style>

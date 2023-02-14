@@ -30,7 +30,9 @@ const texts = computed<TextSetting[]>({
 const fonts = ref(selectedFonts);
 const selectedText = ref("");
 const addText = (): void => {
-  texts.value.push(deepClone(newText));
+  const text: TextSetting = deepClone(newText);
+  texts.value.push(text);
+  selectedText.value = text.id;
 };
 const removeText = (index: number): void => {
   texts.value.splice(index, 1);
@@ -105,6 +107,7 @@ onUnmounted(() => {
                 '--el-slider-button-size': '16px',
                 '--el-slider-height': '4px',
               }"
+              :show-tooltip="false"
               :min="10"
               :max="300"
               v-model="text.size"
