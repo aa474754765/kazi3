@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
+import { useDebounceFn } from "@vueuse/core";
 import GradientsBox from "@/components/GradientsBox/index.vue";
 import CustomizeDialog from "@/components/CustomizeDialog/index.vue";
 import PreviewPanel from "@/components/PreviewPanel/index.vue";
 import vMove from "@/directives/move";
 import { useView } from "./hooks";
-import { debounce } from "lodash";
 
 const {
   gradientType,
@@ -18,7 +18,9 @@ const {
   enterPreviewMode,
 } = useView();
 
-const onscroll = debounce(loadNewGradients, 200);
+const onscroll = useDebounceFn(() => {
+  loadNewGradients();
+}, 200);
 onMounted(() => {
   changeGradientType(gradientType.value);
   window.document.addEventListener("scroll", onscroll);

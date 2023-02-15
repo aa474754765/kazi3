@@ -1,9 +1,10 @@
 import { ElNotification } from "element-plus";
-import { useClipboard } from '@vueuse/core'
-import html2canvas from "html2canvas";
+import { useClipboard } from "@vueuse/core";
 import type { BoxInfo } from "@/types";
 import { starKey, Storager } from "@/utils/storage";
 import { ref } from "vue";
+
+declare const html2canvas: any;
 
 export function useShare() {
   const isStar = ref(false);
