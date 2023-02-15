@@ -5,6 +5,7 @@ import { newColor } from "@/types/models";
 import type { ColorsSetting } from "@/types";
 import vLeft from "./vLeft";
 import vDrag from "@/directives/drag";
+import vTouch from "@/directives/touch";
 import { deepClone } from "@/utils";
 
 interface Props {
@@ -70,6 +71,7 @@ const removeColor = (index: number): void => {
       <div class="center-line"></div>
       <div
         v-drag.preventY.preventColor
+        v-touch.preventY.preventColor
         v-left="color.percentage"
         v-for="(color, index) of colors"
         :index="index"

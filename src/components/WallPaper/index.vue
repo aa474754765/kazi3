@@ -2,6 +2,7 @@
 import { ref, watch } from "vue";
 import type { WallpaperInfo } from "@/types";
 import vDrag from "@/directives/drag";
+import vTouch from "@/directives/touch";
 import EventBus from "@/utils/eventBus";
 
 const props = defineProps<{ data: WallpaperInfo }>();
@@ -47,6 +48,7 @@ const textClicked = (id: string) => {
         color: t.color,
       }"
       v-drag
+      v-touch
       >{{ t.text }}</a
     >
   </div>

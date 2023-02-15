@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed, type CSSProperties, onMounted } from "vue";
 import type { BoxInfo } from "@/types";
+import { useGlobalState } from "@/stores/app";
 import { useShare } from "@/components/share";
 
+const state = useGlobalState();
 const { isStar, setStarStatus, star, unStar, downloadHtml } = useShare();
 
 interface Props {
@@ -50,7 +52,11 @@ const like = (): void => {
   <div
     :style="elStyle"
     class="gradients-box"
-    :class="{ star: isStar, focus: props.focus }"
+    :class="{
+      star: isStar,
+      focus: props.focus,
+      mobile: state.device.value === 'mobile',
+    }"
   >
     <el-icon color="white" size="28" @click.stop="download">
       <Download />
@@ -65,6 +71,15 @@ const like = (): void => {
 </template>
 
 <style scoped lang="scss">
+.mobile {
+  .el-icon {
+    display: none !important;
+  }
+
+  &.overview-mode .like-icon {
+    display: initial;
+  }
+}
 .el-icon {
   display: none;
   position: absolute;
