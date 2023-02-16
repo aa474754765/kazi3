@@ -28,6 +28,13 @@ onMounted(() => {
 </script>
 <template>
   <h1>Your Favorites</h1>
+  <div v-if="gradients.length === 0" class="collecting-box">
+    <router-link class="link" to="/">
+      <el-empty>
+        <kazi-btn>Collecting Your Gradients</kazi-btn>
+      </el-empty>
+    </router-link>
+  </div>
   <Transition
     enter-active-class="bounce-enter-active"
     leave-active-class="bounce-leave-active"
@@ -62,4 +69,14 @@ onMounted(() => {
   </el-row>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.collecting-box {
+  padding: 5rem 0;
+  display: flex;
+  justify-content: center;
+
+  button {
+    padding: 2rem 5rem;
+  }
+}
+</style>

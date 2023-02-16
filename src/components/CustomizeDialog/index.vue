@@ -106,7 +106,7 @@ const sendCustomData = (): void => {
     :show-close="false"
     :style="{ '--el-dialog-bg-color': 'var(--color-dialog-background)' }"
     top="30vh"
-    width="100vh"
+    width="100%"
     v-model="visible"
   >
     <color-range
