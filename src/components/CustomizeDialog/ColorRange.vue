@@ -73,7 +73,7 @@ const modelValue = computed({
 
   .color-range-slider {
     position: relative;
-    width: 50%;
+    width: 80%;
     height: 1.2rem;
     border-radius: 4px;
   }

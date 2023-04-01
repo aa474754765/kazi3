@@ -218,7 +218,7 @@ const starClicked = (info: BoxInfo) => {
   .degree {
     display: flex;
     align-items: center;
-    flex-basis: 40%;
+    flex-basis: 60%;
   }
 }
 
